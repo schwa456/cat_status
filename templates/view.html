@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고양이 활동 및 건강 기록</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>고양이 활동 및 건강 기록</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>날짜</th>
+                <th>이름</th>
+                <th>몸무게 (kg)</th>
+                <th>사료 섭취량 (g)</th>
+                <th>배변 횟수</th>
+                <th>놀이 시간 (분)</th>
+                <th>수면 시간 (시간)</th>
+                <th>혈액검사 1</th>
+                <th>혈액검사 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record[0] }}</td>
+                <td>{{ record[1] }}</td>
+                <td>{{ record[2] }}</td>
+                <td>{{ record[3] }}</td>
+                <td>{{ record[4] }}</td>
+                <td>{{ record[5] }}</td>
+                <td>{{ record[6] }}</td>
+                <td>{{ record[7] }}</td>
+                <td>{{ record[8] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="{{ url_for('index') }}">홈으로 돌아가기</a>
+</body>
+</html>

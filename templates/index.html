@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Activity and Health Management</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <h1>고양이 활동 및 건강 관리</h1>
+    <form action="/save" method="POST">
+        <label>고양이 이름:</label>
+        <label>
+            <input type="text" name="cat_name" required>
+        </label><br>
+
+        <label>몸무게 (kg):</label>
+        <label>
+            <input type="text" name="weight" required>
+        </label><br>
+
+        <label>사료 섭취량 (g):</label>
+        <label>
+            <input type="text" name="meal_grams" required>
+        </label><br>
+
+        <label>배변 횟수:</label>
+        <label>
+            <input type="text" name="litter" required>
+        </label><br>
+
+        <label>놀이 시간 (분):</label>
+        <label>
+            <input type="text" name="play" required>
+        </label><br>
+
+        <label>수면 시간 (시간):</label>
+        <label>
+            <input type="text" name="sleep" required>
+        </label><br>
+
+        <label>혈액검사 1:</label>
+        <label>
+            <input type="text" name="blood_test_1">
+        </label><br>
+
+        <label>혈액검사 2:</label>
+        <label>
+            <input type="text" name="blood_test_2">
+        </label><br>
+
+        <button type="submit">기록 저장</button>
+    </form>
+
+    <a href="/view">기록 보기</a> |
+    <a href="/graph">혈액검사 그래프 보기</a>
+</body>
+</html>
