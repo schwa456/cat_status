@@ -12,22 +12,23 @@
         <label>고양이 이름:</label>
         <input type="text" name="cat_name" required><br>
 
-        <label>혈액검사 1:</label>
-        <input type="text" name="blood_test_1" required><br>
+        <label>WBC:</label>
+        <input type="text" name="WBC" required><br>
 
-        <label>혈액검사 2:</label>
-        <input type="text" name="blood_test_2" required><br>
+        <label>HCT:</label>
+        <input type="text" name="HCT" required><br>
 
-        <label>혈액검사 3:</label>
-        <input type="text" name="blood_test_3" required><br>
+        <label>RBC:</label>
+        <input type="text" name="RBC" required><br>
 
-        <label>혈액검사 4:</label>
-        <input type="text" name="blood_test_4" required><br>
+        <label>HGB:</label>
+        <input type="text" name="HGB" required><br>
 
         <button type="submit">결과 저장</button>
     </form>
 
     <br>
+    <a href="/graph">혈액검사 그래프 보기</a>
     <a href="{{ url_for('index') }}">홈으로 돌아가기</a>
 </body>
 </html>
