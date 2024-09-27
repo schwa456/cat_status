@@ -1,6 +1,14 @@
+/* @font-face를 사용하여 커스텀 폰트 등록*/
+@font-face {
+    font-family: 'JalnanOTF';
+    src: url("../fonts/Jalnan2.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* 전체 페이지 스타일 */
 body {
-    font-family: JalnanOTF, sans-serif;
+    font-family: 'JalnanOTF', sans-serif;
     background-color: #FFF9E6; /* 치즈 색 배경 */
     margin: 0;
     padding: 20px;
@@ -13,6 +21,88 @@ h1 {
     font-size: 2.5em;
     margin-bottom: 20px;
     text-shadow: 2px 2px #FFD966;
+}
+
+/* 폼 컨테이너 스타일 */
+.form-container {
+    width: 50%; /* 폼 전체 너비 */
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff; /* 배경색을 흰색으로 설정 */
+    border-radius: 10px; /* 둥근 모서리 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+    border: 1px solid #e0e0e0; /* 테두리 */
+}
+
+/* 각 입력 필드 그룹 스타일 */
+.form-group {
+    display: flex;
+    justify-content: space-between; /* 라벨과 입력 필드를 좌우로 배치 */
+    align-items: center;
+    margin-bottom: 20px; /* 하단 여백 추가 */
+    padding: 5px 0;
+}
+
+/* 라벨 스타일 */
+.form-label {
+    width: 40%; /* 라벨의 고정 너비 */
+    font-size: 1rem;
+    color: #333; /* 진한 회색 텍스트 */
+    text-align: left;
+    padding: 0 5px; /* 좌우 여백 추가 */
+    font-weight: 500;
+}
+
+/* 입력 필드 스타일 */
+.form-input {
+    flex: 1; /* 입력 필드가 남은 공간을 차지하도록 설정 */
+    padding: 10px;
+    border: 1px solid #d0d0d0; /* 옅은 회색 테두리 */
+    border-radius: 8px; /* 둥근 모서리 */
+    font-size: 1rem;
+    transition: border-color 0.3s ease; /* 테두리 색상 변경 애니메이션 */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* 내측 그림자 */
+}
+
+.form-input:focus {
+    border-color: #00aaff; /* 포커스 시 테두리 색상 */
+    outline: none; /* 기본 outline 제거 */
+    box-shadow: 0 0 5px rgba(0, 170, 255, 0.3); /* 포커스 시 부드러운 파란색 그림자 */
+}
+
+/* 제출 버튼 스타일 */
+.submit-button {
+    width: 100%; /* 버튼 너비를 폼 전체에 맞춤 */
+    padding: 12px;
+    background-color: #00aaff; /* 파란색 버튼 */
+    border: none;
+    color: white;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 8px; /* 둥근 모서리 */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 버튼 그림자 */
+    text-align: center;
+}
+
+/* 제출 버튼 스타일 */
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #FFB347; /* 치즈색 버튼 */
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.submit-button:hover {
+    background-color: #FFAA33; /* 살짝 진한 색으로 변화 */
 }
 
 /* 테이블 스타일 */
@@ -55,14 +145,14 @@ th, td {
 /* 링크 버튼 스타일 */
 a {
     display: inline-block;
-    padding: 10px 20px;
-    margin-top: 20px;
+    padding: 8px 15px;
+    margin-top: 15px;
     background-color: #FFB347; /* 치즈색 버튼 */
     color: white;
     text-decoration: none;
-    border-radius: 25px; /* 둥근 버튼 */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 6px; /* 둥근 버튼 */
     transition: background-color 0.3s ease;
+    font-size: 0.9rem;
 }
 
 a:hover {
