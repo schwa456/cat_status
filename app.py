@@ -116,6 +116,8 @@ def show_health_graph():
         flash("기록된 활동 데이터가 없습니다.", "warning")
         return redirect(url_for('index'))
 
+
+
     plt.plot(dates, weight, marker='o', label='weight')
     plt.plot(dates, meal_grams, marker='o', label='meal_grams')
     plt.plot(dates, litter, marker='o', label='litter')
@@ -141,8 +143,14 @@ def blood_test():
         HCT = request.form['HCT']
         RBC = request.form['RBC']
         HGB = request.form['HGB']
-
-        if not cat_name or not WBC or not HCT or not RBC or not HGB:
+        MCH = request.form['MCH']
+        MCHC = request.form['MCHC']
+        MCV = request.form['MCV']
+        MPV = request.form['MPV']
+        PCT = request.form['PCT']
+        PLT = request.form['PLT']
+        RDW = request.form['RDW']
+        if not cat_name or not WBC or not HCT or not RBC or not HGB or not MCH or not MCHC or not MCV or not MPV or not PCT or not PLT or not RDW:
             flash("모든 혈액검사 항목을 입력하세요.", "warning")
             return redirect(url_for('blood_test'))
 
@@ -151,6 +159,14 @@ def blood_test():
             HCT = float(HCT)
             RBC = float(RBC)
             HGB = float(HGB)
+            MCH = float(MCH)
+            MCHC = float(MCHC)
+            MCV = float(MCV)
+            MPV = float(MPV)
+            PCT = float(PCT)
+            PLT = float(PLT)
+            RDW = float(RDW)
+
         except ValueError:
             flash("혈액검사 결과는 숫자로 입력해야 합니다.", "warning")
             return redirect(url_for('blood_test'))
@@ -158,7 +174,7 @@ def blood_test():
         current_date = datetime.now().strftime("%Y-%m-%d")
         with open(BLOOD_TEST_FILE_PATH, mode='a', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow([current_date, cat_name, WBC, HCT, RBC, HGB])
+            writer.writerow([current_date, cat_name, WBC, HCT, RBC, HGB, MCH, MCHC, MCV, MPV, PCT, PLT, RDW])
 
         flash("혈액검사 결과가 저장되었습니다.", "success")
         return redirect(url_for('blood_test'))

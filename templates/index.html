@@ -10,35 +10,73 @@
     <h1>고양이 활동 및 건강 관리</h1>
     <form action="/save" method="POST" class="form-container">
         <div class="form-group">
-            <div class="form-label">고양이 이름:</div>
-            <input type="text" name="cat_name" required_class="form-input">
-        </div>
-        <div class="form-group">
-            <div class="form-label">몸무게 (kg):</div>
-            <input type="text" name="cat_name" required_class="form-input">
+            <label for="cat_name" class="form-label">고양이 이름 :</label>
+            <div class="form-input">
+                <input type="text" id="cat_name" name="cat_name" class="form-inputbox">
+            </div>
         </div>
 
         <div class="form-group">
-            <div class="form-label">사료 섭취량(g):</div>
-            <input type="text" name="cat_name" required_class="form-input">
+            <label for="weight" class="form-label">몸무게 :</label>
+            <div class="form-input">
+                <label>
+                    <input type="number" id="weight" name="weight" placeholder="0.0" step="0.1" pattern="d*(.d{0, 2})?$" class="form-inputbox">
+                </label>
+                <div class="unit">
+                    <h5 class="unit">kg</h5>
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
-            <div class="form-label">배변 횟수:</div>
-            <input type="text" name="cat_name" required_class="form-input">
+            <label for="meal_grams" class="form-label">사료섭취량 :</label>
+            <div class="form-input">
+                <label>
+                    <input type="number" id="meal_grams" name="meal_grams" placeholder="0" step="1" pattern="d*(.d{0, 2})?$" class="form-inputbox">
+                </label>
+                <div class="unit">
+                    <h5 class="unit">g</h5>
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
-            <div class="form-label">놀이 시간 (분):</div>
-            <input type="text" name="cat_name" required_class="form-input">
+            <label for="litter" class="form-label">배변 횟수 :</label>
+            <div class="form-input">
+                <label>
+                    <input type="number" id="litter" name="litter" placeholder="0" step="1" pattern="d*(.d{0, 2})?$" class="form-inputbox">
+                </label>
+                <div class="unit">
+                    <h5 class="unit">회</h5>
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
-            <div class="form-label">수면 시간(시간):</div>
-            <input type="text" name="cat_name" required_class="form-input">
+            <label for="play" class="form-label">놀이 시간 :</label>
+            <div class="form-input">
+                <label>
+                    <input type="number" id="play" name="play" placeholder="0" step="1" pattern="d*(.d{0, 2})?$" class="form-inputbox">
+                </label>
+                <div class="unit">
+                    <h5 class="unit">분</h5>
+                </div>
+            </div>
         </div>
 
-        <button type="submit">기록 저장</button>
+        <div class="form-group">
+            <label for="sleep" class="form-label">수면 시간 :</label>
+            <div class="form-input">
+                <label>
+                    <input type="number" id="sleep" name="sleep" placeholder="0" step="1" pattern="d*(.d{0, 2})?$" class="form-inputbox">
+                </label>
+                <div class="unit">
+                    <h5 class="unit">분</h5>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-button">기록 저장</button>
     </form>
 
     <a href="/view">기록 보기</a> |

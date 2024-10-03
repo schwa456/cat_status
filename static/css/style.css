@@ -25,7 +25,7 @@ h1 {
 
 /* 폼 컨테이너 스타일 */
 .form-container {
-    width: 50%; /* 폼 전체 너비 */
+    width: 30%; /* 폼 전체 너비 */
     margin: 30px auto;
     padding: 20px;
     background-color: #ffffff; /* 배경색을 흰색으로 설정 */
@@ -37,53 +37,64 @@ h1 {
 /* 각 입력 필드 그룹 스타일 */
 .form-group {
     display: flex;
-    justify-content: space-between; /* 라벨과 입력 필드를 좌우로 배치 */
-    align-items: center;
-    margin-bottom: 20px; /* 하단 여백 추가 */
-    padding: 5px 0;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-bottom: 32px;
 }
 
 /* 라벨 스타일 */
 .form-label {
-    width: 40%; /* 라벨의 고정 너비 */
-    font-size: 1rem;
-    color: #333; /* 진한 회색 텍스트 */
-    text-align: left;
-    padding: 0 5px; /* 좌우 여백 추가 */
+    width: 160px;
     font-weight: 500;
+    padding: 10px 0;
+    white-space: pre-line;
+    font-family: 'JalnanOTF', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: -0.32px;
+    text-align: left;
 }
 
 /* 입력 필드 스타일 */
 .form-input {
-    flex: 1; /* 입력 필드가 남은 공간을 차지하도록 설정 */
-    padding: 10px;
-    border: 1px solid #d0d0d0; /* 옅은 회색 테두리 */
-    border-radius: 8px; /* 둥근 모서리 */
-    font-size: 1rem;
-    transition: border-color 0.3s ease; /* 테두리 색상 변경 애니메이션 */
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* 내측 그림자 */
+    width: 100%;
+    max-width: 360px;
+    text-align: right;
+    height: 48px;
+    border-radius: 14px;
+    background-color: rgb(246, 247, 248);
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    margin-left: auto;
+    padding-right: 10px;
+    padding-left: 10px;
 }
-
 .form-input:focus {
     border-color: #00aaff; /* 포커스 시 테두리 색상 */
     outline: none; /* 기본 outline 제거 */
     box-shadow: 0 0 5px rgba(0, 170, 255, 0.3); /* 포커스 시 부드러운 파란색 그림자 */
 }
-
-/* 제출 버튼 스타일 */
-.submit-button {
-    width: 100%; /* 버튼 너비를 폼 전체에 맞춤 */
-    padding: 12px;
-    background-color: #00aaff; /* 파란색 버튼 */
+.form-inputbox {
+    color: rgb(9, 9, 9);
+    font-family: 'JalnanOTF', sans-serif;
+    height: 26px;
+    font-size: 14px;
+    outline: none;
     border: none;
-    color: white;
-    font-size: 1.1em;
-    font-weight: bold;
-    border-radius: 8px; /* 둥근 모서리 */
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 버튼 그림자 */
-    text-align: center;
+    width: 100%;
+    background-color: rgb(246, 247, 248);
+    box-sizing: border-box;
+    text-align: right;
+}
+
+.unit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "JalnanOTF", sans-serif;
 }
 
 /* 제출 버튼 스타일 */
@@ -93,6 +104,7 @@ h1 {
     background-color: #FFB347; /* 치즈색 버튼 */
     border: none;
     color: white;
+    font-family: "JalnanOTF", sans-serif;
     font-size: 1.2em;
     border-radius: 25px;
     cursor: pointer;
@@ -100,7 +112,6 @@ h1 {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
 }
-
 .submit-button:hover {
     background-color: #FFAA33; /* 살짝 진한 색으로 변화 */
 }
@@ -115,18 +126,15 @@ table {
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 th, td {
     padding: 15px;
     text-align: left;
 }
-
 th {
     background-color: #FFDD99; /* 진한 치즈 색 */
     color: #704214; /* 어두운 갈색 글자 */
     font-weight: bold;
 }
-
 td {
     background-color: #FFF9E6; /* 연한 치즈 색 */
     color: #333; /* 어두운 글자 */
@@ -154,7 +162,6 @@ a {
     transition: background-color 0.3s ease;
     font-size: 0.9rem;
 }
-
 a:hover {
     background-color: #FFAA33; /* 살짝 진한 색으로 변화 */
 }
@@ -165,4 +172,49 @@ img {
     height: auto;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* --- 반응형 스타일 --- */
+
+/* 태블릿 (화면 너비 768px 이하일 때 적용) */
+@media screen and (max-width: 768px) {
+    .form-container {
+        width: 70%; /* 폼 너비를 줄임 */
+        padding: 15px;
+    }
+
+    .form-label {
+        width: 35%; /* 라벨의 너비를 줄여서 폼 요소 간 간격 확보 */
+    }
+
+    .submit-button {
+        font-size: 1em; /* 버튼 폰트 크기를 줄여서 작은 화면에 맞춤 */
+    }
+}
+
+/* 모바일 (화면 너비 480px 이하일 때 적용) */
+@media screen and (max-width: 480px) {
+    .form-container {
+        width: 90%; /* 모바일에서 폼이 거의 전체 화면을 차지하도록 함 */
+        padding: 10px;
+    }
+
+    .form-group {
+        flex-direction: column; /* 입력 필드와 라벨을 세로로 정렬 */
+        align-items: flex-start; /* 세로 정렬에서 왼쪽으로 정렬 */
+    }
+
+    .form-label {
+        width: 100%; /* 라벨의 너비를 100%로 설정하여 화면 전체를 차지하게 만듦 */
+        margin-bottom: 5px; /* 라벨과 입력 필드 사이의 간격 추가 */
+        text-align: left; /* 라벨을 왼쪽 정렬 */
+    }
+
+    .form-input {
+        width: 100%; /* 입력 필드도 100% 너비로 확장 */
+    }
+
+    .submit-button {
+        width: 100%; /* 제출 버튼도 화면에 맞춰 확장 */
+    }
 }

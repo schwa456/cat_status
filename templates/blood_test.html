@@ -8,23 +8,92 @@
 </head>
 <body>
     <h1>혈액검사 결과 입력</h1>
-    <form action="{{ url_for('blood_test') }}" method="POST">
-        <label>고양이 이름:</label>
-        <input type="text" name="cat_name" required><br>
+    <form action="{{ url_for('blood_test') }}" method="POST" class="form-container">
+        <div class="form-group">
+            <label for="cat_name" class="form-label">고양이 이름 :</label>
+            <div class="form-input">
+                <input type="text" id="cat_name" name="cat_name" class="form-inputbox">
+            </div>
+        </div>
 
-        <label>WBC:</label>
-        <input type="text" name="WBC" required><br>
+        <div class="form-group">
+            <label for="WBC" class="form-label">WBC :</label>
+            <div class="form-input">
+                <input type="text" id="WBC" name="WBC" class="form-inputbox">
+            </div>
+        </div>
 
-        <label>HCT:</label>
-        <input type="text" name="HCT" required><br>
+        <div class="form-group">
+            <label for="HCT" class="form-label">HCT :</label>
+            <div class="form-input">
+                <input type="text" id="HCT" name="HCT" class="form-inputbox">
+            </div>
+        </div>
 
-        <label>RBC:</label>
-        <input type="text" name="RBC" required><br>
+        <div class="form-group">
+            <label for="RBC" class="form-label">RBC :</label>
+            <div class="form-input">
+                <input type="text" id="RBC" name="RBC" class="form-inputbox">
+            </div>
+        </div>
 
-        <label>HGB:</label>
-        <input type="text" name="HGB" required><br>
+        <div class="form-group">
+            <label for="HGB" class="form-label">HGB :</label>
+            <div class="form-input">
+                <input type="text" id="HGB" name="HGB" class="form-inputbox">
+            </div>
+        </div>
 
-        <button type="submit">결과 저장</button>
+        <div class="form-group">
+            <label for="MCH" class="form-label">MCH :</label>
+            <div class="form-input">
+                <input type="text" id="MCH" name="MCH" class="form-inputbox">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="MCHC" class="form-label">MCHC :</label>
+            <div class="form-input">
+                <input type="text" id="MCHC" name="MCH" class="form-inputbox">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="MCV" class="form-label">MCV :</label>
+            <div class="form-input">
+                <input type="text" id="MCV" name="MCV" class="form-inputbox">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="MPV" class="form-label">MPV :</label>
+            <div class="form-input">
+                <input type="text" id="MPV" name="MPV" class="form-inputbox">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="PCT" class="form-label">PCT :</label>
+            <div class="form-input">
+                <input type="text" id="PCT" name="PCT" class="form-inputbox">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="PLT" class="form-label">PLT :</label>
+            <div class="form-input">
+                <input type="text" id="PLT" name="PLT" class="form-inputbox">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="RDW" class="form-label">RDW :</label>
+            <div class="form-input">
+                <input type="text" id="RDW" name="RDW" class="form-inputbox">
+            </div>
+        </div>
+
+        <button type="submit" class="submit-button">결과 저장</button>
     </form>
 
     <br>
