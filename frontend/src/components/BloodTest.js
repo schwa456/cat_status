@@ -38,10 +38,10 @@ function BloodTest({ catId }) {
 
     return (
         <div>
-            <h3>Blood Tests</h3>
+            <h3>혈액검사 결과 입력</h3>
             <form onSubmit={handleSubmit}>
                 <textarea name="results" placeholder='Enter JSON results: e.g. { "RBC": 6.5, "WBC": 7.2 }' onChange={handleChange} required />
-                <button type="submit">Add Blood Test</button>
+                <button type="submit">혈액검사 결과 추가</button>
             </form>
             <ul>
                 {bloodTests.map((test, index) => (

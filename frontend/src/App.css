@@ -40,3 +40,15 @@ li {
     padding: 10px;
     border-radius: 5px;
 }
+
+.logout-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 15px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

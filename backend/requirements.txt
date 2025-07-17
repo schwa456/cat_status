@@ -5,3 +5,4 @@ fastapi-mail
 sqlalchemy
 passlib[bcrypt]
 pyjwt
+pydantic

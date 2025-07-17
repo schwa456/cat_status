@@ -38,9 +38,9 @@ function CatSelector({ userId, onCatSelect }) {
 
     return (
         <div>
-            <h2>Select a Cat</h2>
+            <h2>고양이 선택</h2>
             <select onChange={(e) => onCatSelect(e.target.value)}>
-                <option value="">--Select a Cat--</option>
+                <option value="">--고양이를 선택하세요.--</option>
                 {cats.map((cat) => (
                     <option key={cat.id} value={cat.id}>
                         {cat.name}
@@ -50,12 +50,12 @@ function CatSelector({ userId, onCatSelect }) {
             <form onSubmit={handleAddCat}>
                 <input
                     type="text"
-                    placeholder="New Cat Name"
+                    placeholder="새로운 고양이 이름"
                     value={newCatName}
                     onChange={(e) => setNewCatName(e.target.value)}
                     required
                 />
-                <button type="submit">Add Cat</button>
+                <button type="submit">고양이 추가하기</button>
             </form>
         </div>
     );

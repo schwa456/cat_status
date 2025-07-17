@@ -79,18 +79,18 @@ function HealthTracker({ catId }) {
         <div>
             <h3>Health Records</h3>
             <form onSubmit={handleSubmit}>
-                <input type="number" name="weight" placeholder="Weight" onChange={handleChange} step="any" value={newRecord.weight} required />
-                <input type="number" name="meals" placeholder="Meals" onChange={handleChange} value={newRecord.meals} required />
-                <input type="number" name="poops" placeholder="Poops" onChange={handleChange} value={newRecord.poops} required />
-                <input type="number" name="plays" placeholder="Plays" onChange={handleChange} value={newRecord.plays} required />
-                <input type="number" name="sleeps" placeholder="Sleeps" onChange={handleChange} value={newRecord.sleeps} required />
+                <input type="number" name="weight" placeholder="몸무게" onChange={handleChange} step="any" value={newRecord.weight} required />
+                <input type="number" name="meals" placeholder="식사 횟수" onChange={handleChange} value={newRecord.meals} required />
+                <input type="number" name="poops" placeholder="배변 횟수" onChange={handleChange} value={newRecord.poops} required />
+                <input type="number" name="plays" placeholder="놀이 시간(분)" onChange={handleChange} value={newRecord.plays} required />
+                <input type="number" name="sleeps" placeholder="수면 시간(분)" onChange={handleChange} value={newRecord.sleeps} required />
                 <button type="submit">Add/Update Record</button>
             </form>
 
             <div>
-                <button onClick={() => setCurrentView('list')}>List View</button>
-                <button onClick={() => setCurrentView('graph')}>Graph View</button>
-                <button onClick={() => setCurrentView('calendar')}>Calendar View</button>
+                <button onClick={() => setCurrentView('list')}>누적으로 보기</button>
+                <button onClick={() => setCurrentView('graph')}>그래프로 보기</button>
+                <button onClick={() => setCurrentView('calendar')}>달력으로 보기</button>
             </div>
 
             {currentView === 'list' && (

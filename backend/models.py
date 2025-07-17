@@ -14,7 +14,7 @@ class User(UserBase):
     verified: bool
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class CatBase(BaseModel):
     name: str
@@ -27,7 +27,7 @@ class Cat(CatBase):
     owner_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class HealthRecordBase(BaseModel):
     date: str
@@ -45,7 +45,7 @@ class HealthRecord(HealthRecordBase):
     cat_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class BloodTestBase(BaseModel):
     date: str
@@ -59,4 +59,4 @@ class BloodTest(BloodTestBase):
     cat_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
