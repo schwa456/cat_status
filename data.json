@@ -1,0 +1,13 @@
+{
+    "users": [
+        {
+            "username": "admin",
+            "email": "admin@example.com",
+            "password": "admin",
+            "verified": true
+        }
+    ],
+    "cats": [],
+    "health_records": [],
+    "blood_tests": []
+}
