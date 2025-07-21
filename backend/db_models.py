@@ -11,6 +11,8 @@ class User(Base):
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
     verified = Column(Boolean, default=False)
+    nickname = Column(String, index=True)
+    phone = Column(String, index=True)
 
     cats = relationship("Cat", back_populates="owner")
 

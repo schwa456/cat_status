@@ -7,11 +7,15 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str
+    nickname: str
+    phone: str
 
 class User(UserBase):
     id: int
     is_active: bool
     verified: bool
+    nickname: str
+    phone: str
 
     class Config:
         from_attributes = True

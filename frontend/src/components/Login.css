@@ -1,0 +1,75 @@
+/* frontend/src/components/Login.css */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column; /* 이 속성이 내부 요소들을 세로로 정렬합니다. */
+  width: 100%;
+  max-width: 350px;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.login-form h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* 레이블과 인풋을 묶는 그룹 */
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-group label {
+  display: block; /* 레이블을 별도의 줄에 표시 */
+  margin-bottom: 8px; /* 레이블과 인풋 사이의 간격 */
+  font-weight: bold;
+  text-align: left;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* 패딩과 테두리를 너비에 포함 */
+}
+
+.login-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #FFB347; /* 기존 CSS의 치즈색 테마 유지 */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: #FFAA33;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.register-link {
+  margin-top: 20px;
+  text-align: center;
+}
