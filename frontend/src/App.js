@@ -1,12 +1,13 @@
 // frontend/src/App.js
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, Link} from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import Verify from './components/Verify';
 import HealthTracker from './components/HealthTracker';
 import BloodTest from './components/BloodTest';
 import CatSelector from "./components/CatSelector";
+import NavigationBar from "./components/NavigationBar";
 import './App.css';
 
 function App() {
@@ -35,7 +36,9 @@ function App() {
         <Router>
             <div className="App">
                 <header className="App-header">
-                    <h1>고양이 건강 기록장</h1>
+                    <Link to="/" className="header-link">
+                        <h1>고양이 건강 기록장</h1>
+                    </Link>
                     {/* 로그인 상태일 때만 로그아웃 버튼 표시 */}
                     {token && <button onClick={handleLogout} className="logout-button">로그아웃</button>}
                 </header>
@@ -59,6 +62,7 @@ function App() {
                         ) : <Navigate to="/login" />} />
                     </Routes>
                 </main>
+                {token && <NavigationBar />}
             </div>
         </Router>
     );

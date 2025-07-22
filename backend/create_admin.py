@@ -1,9 +1,16 @@
 # backend/create_admin.py
+import os
+import sys
+from passlib.context import CryptContext
+
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 from sqlalchemy.orm import Session
-from .database import SessionLocal
+from .database import SessionLocal, engine
 from . import db_models
 from .routers.auth import get_password_hash
+
+db_models.Base.metadata.create_all(bind=engine)
 
 ADMIN_USERNAME = "admin"
 ADMIN_PASSWORD = "admin"

@@ -28,28 +28,39 @@ function Home({ userId }) {
         navigate('/add-cat'); // 새 고양이 등록 페이지 라우트
     };
 
-    return (
+return (
         <div className="home-container">
             <h2>내 고양이들</h2>
             <div className="cat-card-container">
-                {cats.map(cat => (
-                    <div key={cat.id} className="cat-card" onClick={() => handleCardClick(cat.id)}>
-                        <img src="https://via.placeholder.com/150" alt={cat.name} className="cat-photo" />
-                        <h3>{cat.name}</h3>
-                        <p>나이: {cat.age || '정보 없음'}</p>
-                        <p>성별: {cat.gender || '정보 없음'} ({cat.neutered ? '중성화 O' : '중성화 X'})</p>
-                        <div className="cat-summary">
-                            <h4>최근 요약</h4>
-                            <p>최근 기록이 여기에 표시됩니다.</p>
-                        </div>
-                    </div>
-                ))}
-                {/* 고양이 추가 카드 */}
-                {cats.length < 3 && (
-                     <div className="cat-card add-cat-card" onClick={handleAddCatClick}>
+                {/* 고양이 목록이 비어있을 경우 */}
+                {cats.length === 0 ? (
+                    <div className="cat-card empty-card" onClick={handleAddCatClick}>
                         <div className="add-cat-icon">+</div>
-                        <p>고양이 추가</p>
+                        <p>고양이 추가하기</p>
                     </div>
+                ) : (
+                    // 고양이 목록이 있을 경우
+                    <>
+                        {cats.map(cat => (
+                            <div key={cat.id} className="cat-card" onClick={() => handleCardClick(cat.id)}>
+                                <img src="https://via.placeholder.com/150" alt={cat.name} className="cat-photo" />
+                                <h3>{cat.name}</h3>
+                                <p>나이: {cat.age || '정보 없음'}</p>
+                                <p>성별: {cat.gender || '정보 없음'} ({cat.neutered ? '중성화 O' : '중성화 X'})</p>
+                                <div className="cat-summary">
+                                    <h4>최근 요약</h4>
+                                    <p>최근 기록이 여기에 표시됩니다.</p>
+                                </div>
+                            </div>
+                        ))}
+                        {/* 고양이가 3마리 미만일 때만 추가 카드 표시 */}
+                        {cats.length < 3 && (
+                             <div className="cat-card add-cat-card" onClick={handleAddCatClick}>
+                                <div className="add-cat-icon">+</div>
+                                <p>고양이 추가</p>
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
         </div>

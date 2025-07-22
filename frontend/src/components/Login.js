@@ -12,7 +12,7 @@ const Login = ({onLogin}) => {
   const handleLogin = async (event) => {
     event.preventDefault();
 
-    const formData = new FormData();
+    const formData = new URLSearchParams();
     formData.append('username', username);
     formData.append('password', password);
 
