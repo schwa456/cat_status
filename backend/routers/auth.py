@@ -35,6 +35,8 @@ def register(user: models.UserCreate, db: Session = Depends(database.get_db)):
         username=user.username,
         email=user.email,
         hashed_password=hashed_password,
+        is_active=user.is_active,
+        verified=user.verified,
         nickname=user.nickname,
         phone=user.phone
     )
