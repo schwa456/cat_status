@@ -2,7 +2,7 @@ import React from 'react';
 import * as LucideIcons from 'lucide-react';
 import { HelpCircle } from 'lucide-react';
 
-function Icon({
+export function Icon({
     name,
     size = 24,
     color = "currentColor",

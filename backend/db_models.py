@@ -22,19 +22,19 @@ class Cat(Base):
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
     owner_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
     name: Mapped[str] = mapped_column(index=True)
-    species: Mapped[str] = mapped_column(index=True)
+    breed: Mapped[str] = mapped_column(index=True)
     birth_date: Mapped[DateTime] = mapped_column(index=True)
-    meet_data: Mapped[DateTime] = mapped_column(index=True)
+    meet_date: Mapped[DateTime] = mapped_column(index=True)
     age: Mapped[int] = mapped_column(index=True)
     gender: Mapped[str] = mapped_column(index=True)
     neutered: Mapped[bool] = mapped_column(index=False)
 
     owner: Mapped["User"] = relationship(back_populates="cat")
-    health_record: Mapped["HealthRecord"] = relationship(back_populates="cat")
+    health_record: Mapped["ActivityRecord"] = relationship(back_populates="cat")
     blood_test_event: Mapped["BloodTestEvent"] = relationship(back_populates="cat")
 
-class HealthRecord(Base):
-    __tablename__ = "health_record"
+class ActivityRecord(Base):
+    __tablename__ = "activity_record"
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
     cat_id: Mapped[int] = mapped_column(ForeignKey("cat.id"))
