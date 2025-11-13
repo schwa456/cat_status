@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+
+
 import AuthTabs from './components/AuthTabs';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
@@ -15,8 +17,7 @@ const UserRegistrationLogin = () => {
 
   const handleLogin = async (data) => {
     setIsLoading(true);
-    
-    // Mock authentication delay
+
     setTimeout(() => {
       setIsLoading(false);
       // Store user session (mock)
@@ -75,9 +76,10 @@ const UserRegistrationLogin = () => {
   return (
     <>
       <Helmet>
-        <title>Sign In - CatCare Tracker</title>
-        <meta name="description" content="Sign in to your CatCare Tracker account to monitor your cat's health and activities." />
+        <title>{activeTab === 'login' ? '로그인' : '회원가입'} - 고양이 건강 기록장</title>
+        <meta name="description" content={activeTab === 'login' ? "고양이 건강 기록장 계정에 로그인하세요." : "고양이 건강 기록장 계정을 생성하세요."} />
       </Helmet>
+
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <div className="w-full max-w-md">
           <div className="bg-card rounded-2xl shadow-elevated p-8 border border-border">

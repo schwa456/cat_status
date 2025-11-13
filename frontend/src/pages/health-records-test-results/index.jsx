@@ -13,27 +13,7 @@ import HealthTrendsChart from "./components/HealthTrendsChart";
 import HealthRecordDetailModal from "./components/HealthRecordDetailModal";
 import healthRecordFilters from "./components/HealthRecordFilters";
 
-const HealthRecordsTestResults = () => {
-  const location = useLocation();
-  const [selectedCat, setSelectedCat] = useState(null);
-  const [isAddModelOpen, setIsAddModalOpen] = useState(false);
-  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-  const [selectedRecord, setSelectedRecord] = useState(null);
-  const [healthRecords, setHealthRecords] = useState([]);
-  const [filters, setFilters] = useState({
-    search: '',
-    type: 'all',
-    priority: 'all',
-    sortBy: 'date-desc',
-    dateFrom: '',
-    dateTo: '',
-    veterinarian: '',
-    showAbnormalOnly: false,
-    hasAttachments: false,
-    upcomingVaccinations: false,
-  });
-
-  const mockCats = [
+ const mockCats = [
     { id: 1, name: 'Whiskers', photo: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400', lastActivity: '2 hours ago' },
     { id: 2, name: 'Luna', photo: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400', lastActivity: '4 hours ago' },
     { id: 3, name: 'Shadow', photo: 'https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400', lastActivity: '1 day ago' }
@@ -169,6 +149,26 @@ const HealthRecordsTestResults = () => {
       createdAt: new Date('2024-05-28T08:00:00')
     }
   ];
+
+const HealthRecordsTestResults = () => {
+  const location = useLocation();
+  const [selectedCat, setSelectedCat] = useState(null);
+  const [isAddModelOpen, setIsAddModalOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState(null);
+  const [healthRecords, setHealthRecords] = useState([]);
+  const [filters, setFilters] = useState({
+    search: '',
+    type: 'all',
+    priority: 'all',
+    sortBy: 'date-desc',
+    dateFrom: '',
+    dateTo: '',
+    veterinarian: '',
+    showAbnormalOnly: false,
+    hasAttachments: false,
+    upcomingVaccinations: false,
+  });
 
   useEffect(() => {
     // Set Default Selected Cat

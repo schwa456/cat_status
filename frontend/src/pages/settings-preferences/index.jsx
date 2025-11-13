@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import Header from '../../components/Header';
-import QuickActionButton from '../../components/ui/QuickActionButton';
+import { Helmet } from 'react-helmet';
+import Card from '../../components/ui/Card';
+import { Icon } from '../../components/AppIcon';
+
+
 import AccountSettings from './components/AccountSettings';
 import NotificationSettings from './components/NotificationSettings';
 import DataManagement from './components/DataManagement';
@@ -8,7 +11,7 @@ import AppPreferences from './components/AppPreferences';
 import PrivacySecurity from './components/PrivacySecurity';
 import SupportHelp from './components/SupportHelp';
 import SettingsSearch from './components/SettingsSearch';
-import Icon from '../../components/AppIcon';
+
 
 const SettingsPreferences = () => {
   const [expandedSections, setExpandedSections] = useState({
@@ -102,97 +105,89 @@ const SettingsPreferences = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header 
-        showCatSelector={false} 
-        selectedCat={null}
-        onCatChange={() => {}}
-      />
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <>
+        <Helmet>
+            <title>환경설정 - 고양이 건강 기록장</title>
+            <meta name="description" content="계정, 개인 정보 보호 및 앱 환경설정을 관리합니다." />
+        </Helmet>
+
+        <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Page Header */}
-        <div className="mb-8">
-          <div className="flex items-center space-x-3 mb-2">
-            <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-              <Icon name="Settings" size={24} className="text-primary" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold text-foreground">Settings & Preferences</h1>
-              <p className="text-muted-foreground">Manage your account, privacy, and app preferences</p>
+          <div className="mb-8">
+            <div className="flex items-center space-x-3 mb-2">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                <Icon name="Settings" size={24} className="text-primary" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-foreground">Settings & Preferences</h1>
+                <p className="text-muted-foreground">Manage your account, privacy, and app preferences</p>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Search */}
-        <div className="mb-8">
-          <SettingsSearch 
+        <Card>
+          <SettingsSearch
             onSearchResults={handleSearchResults}
             allSettings={allSettings}
           />
-        </div>
+        </Card>
 
-        {/* Settings Sections */}
-        <div className="space-y-6">
-          <div id="settings-account">
-            <AccountSettings
-              isExpanded={expandedSections?.account}
-              onToggle={() => toggleSection('account')}
-            />
-          </div>
+        <Card>
+          <NotificationSettings
+            isExpanded={expandedSections?.notifications}
+            onToggle={() => toggleSection('notifications')}
+          />
+        </Card>
 
-          <div id="settings-notifications">
-            <NotificationSettings
-              isExpanded={expandedSections?.notifications}
-              onToggle={() => toggleSection('notifications')}
-            />
-          </div>
+        <Card>
+          <DataManagement
+            isExpanded={expandedSections?.data}
+            onToggle={() => toggleSection('data')}
+          />
+        </Card>
 
-          <div id="settings-data">
-            <DataManagement
-              isExpanded={expandedSections?.data}
-              onToggle={() => toggleSection('data')}
-            />
-          </div>
+        <Card>
+          <AppPreferences
+            isExpanded={expandedSections?.preferences}
+            onToggle={() => toggleSection('preferences')}
+          />
+        </Card>
 
-          <div id="settings-preferences">
-            <AppPreferences
-              isExpanded={expandedSections?.preferences}
-              onToggle={() => toggleSection('preferences')}
-            />
-          </div>
-
-          <div id="settings-privacy">
+        <Card>
             <PrivacySecurity
               isExpanded={expandedSections?.privacy}
               onToggle={() => toggleSection('privacy')}
             />
-          </div>
+        </Card>
 
-          <div id="settings-support">
+        <Card>
             <SupportHelp
               isExpanded={expandedSections?.support}
               onToggle={() => toggleSection('support')}
             />
-          </div>
-        </div>
+        </Card>
 
-        {/* Quick Actions Info */}
-        <div className="mt-12 p-6 bg-muted/30 rounded-lg">
-          <div className="flex items-start space-x-4">
-            <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-              <Icon name="Lightbulb" size={20} className="text-primary" />
-            </div>
-            <div>
-              <h3 className="font-medium text-foreground mb-2">Quick Tips</h3>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Use the search bar above to quickly find specific settings</li>
-                <li>• Enable automatic backups to keep your pet's data safe</li>
-                <li>• Set up feeding reminders to maintain consistent meal schedules</li>
-                <li>• Export health records before veterinary visits for easy sharing</li>
-                <li>• Review privacy settings to control how your data is used</li>
-              </ul>
+        <Card>
+          <div className="mt-12 p-6 bg-muted/30 rounded-lg">
+            <div className="flex items-start space-x-4">
+              <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                <Icon name="Lightbulb" size={20} className="text-primary" />
+              </div>
+              <div>
+                <h3 className="font-medium text-foreground mb-2">Quick Tips</h3>
+                <ul className="text-sm text-muted-foreground space-y-1">
+                  <li>• Use the search bar above to quickly find specific settings</li>
+                  <li>• Enable automatic backups to keep your pet's data safe</li>
+                  <li>• Set up feeding reminders to maintain consistent meal schedules</li>
+                  <li>• Export health records before veterinary visits for easy sharing</li>
+                  <li>• Review privacy settings to control how your data is used</li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
+        </Card>
 
         {/* Footer */}
         <div className="mt-12 pt-8 border-t border-border text-center">
@@ -203,9 +198,7 @@ const SettingsPreferences = () => {
             Caring for your feline friends with love and technology
           </p>
         </div>
-      </div>
-      <QuickActionButton />
-    </div>
+      </>
   );
 };
 

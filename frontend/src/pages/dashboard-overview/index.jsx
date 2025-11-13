@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar';
-import QuickActionButton from '../../components/ui/QuickActionButton';
+import Card from '../../components/ui/Card';
+
 import CatProfileCard from './components/CatProfileCard';
 import ActivityFeed from './components/ActivityFeed';
 import MetricsPanel from './components/MetricsPanel';
 import RemindersPanel from './components/RemindersPanel';
 import QuickActionsPanel from './components/QuickActionsPanel';
 
-const DashboardOverview = () => {
-  const navigate = useNavigate();
-  const [selectedCat, setSelectedCat] = useState(null);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [activities, setActivities] = useState([]);
-  const [reminders, setReminders] = useState([]);
 
   // Mock data for cats
   const mockCats = [
@@ -160,6 +154,12 @@ const DashboardOverview = () => {
     { week: 'Week 4', healthScore: 95, activityLevel: 87 }
   ];
 
+const DashboardOverview = () => {
+  const navigate = useNavigate();
+  const [selectedCat, setSelectedCat] = useState(null);
+  const [activities, setActivities] = useState([]);
+  const [reminders, setReminders] = useState([]);
+
   useEffect(() => {
     // Set default selected cat
     setSelectedCat(mockCats?.[0]);
@@ -211,105 +211,55 @@ const DashboardOverview = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header 
-        selectedCat={selectedCat}
-        onCatChange={handleCatChange}
-        showCatSelector={true}
-      />
-      
-      <div className="flex">
-        <Sidebar 
-          isCollapsed={isSidebarCollapsed}
-          onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-        />
-        
-        <main className={`flex-1 transition-all duration-300 ${
-          isSidebarCollapsed ? 'ml-16' : 'ml-64'
-        }`}>
-          <div className="p-6">
-            {/* Mobile Layout */}
-            <div className="lg:hidden space-y-6">
-              {selectedCat && (
-                <CatProfileCard 
-                  cat={selectedCat}
-                  onEditProfile={handleEditProfile}
-                />
-              )}
-              
-              <QuickActionsPanel 
-                onQuickLog={handleQuickLog}
-                selectedCat={selectedCat}
-              />
-              
-              <ActivityFeed 
-                activities={activities}
-                onEditActivity={handleEditActivity}
-                onDeleteActivity={handleDeleteActivity}
-              />
-              
-              <RemindersPanel 
-                reminders={reminders}
-                onCompleteReminder={handleCompleteReminder}
-                onSnoozeReminder={handleSnoozeReminder}
-                onAddReminder={handleAddReminder}
-              />
-              
-              <MetricsPanel 
-                weeklyData={weeklyData}
-                monthlyTrends={monthlyTrends}
-              />
-            </div>
+    <>
+      <Helmet>
+        <title>대시보드 - 고양이 건강 기록장</title>
+        <meta name="description" content="고양이 건강 기록장 대시보드 페이지" />
+      </Helmet>
 
-            {/* Desktop Layout */}
-            <div className="hidden lg:block">
-              <div className="grid grid-cols-12 gap-6">
-                {/* Left Column - Cat Profile & Quick Actions */}
-                <div className="col-span-3 space-y-6">
-                  {selectedCat && (
-                    <CatProfileCard 
-                      cat={selectedCat}
-                      onEditProfile={handleEditProfile}
-                    />
-                  )}
-                  
-                  <QuickActionsPanel 
-                    onQuickLog={handleQuickLog}
-                    selectedCat={selectedCat}
-                  />
-                </div>
+      <div className="space-y-6">
+        {selectedCat && (
+            <Card>
+              <CatProfileCard
+                cat={selectedCat}
+                onEditProfile={handleEditProfile}
+              />
+            </Card>
+        )}
 
-                {/* Center Column - Activity Feed */}
-                <div className="col-span-6">
-                  <ActivityFeed 
-                    activities={activities}
-                    onEditActivity={handleEditActivity}
-                    onDeleteActivity={handleDeleteActivity}
-                  />
-                </div>
+        <Card>
+          <QuickActionsPanel
+            onQuickLog={handleQuickLog}
+            selectedCat={selectedCat}
+            onCatChange={handleCatChange}
+          />
+        </Card>
 
-                {/* Right Column - Metrics & Reminders */}
-                <div className="col-span-3 space-y-6">
-                  <RemindersPanel 
-                    reminders={reminders}
-                    onCompleteReminder={handleCompleteReminder}
-                    onSnoozeReminder={handleSnoozeReminder}
-                    onAddReminder={handleAddReminder}
-                  />
-                  
-                  <MetricsPanel 
-                    weeklyData={weeklyData}
-                    monthlyTrends={monthlyTrends}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
+        <Card>
+          <RemindersPanel
+            reminders={reminders}
+            onCompleteReminder={handleCompleteReminder}
+            onSnoozeReminder={handleSnoozeReminder}
+            onAddReminder={handleAddReminder}
+          />
+        </Card>
+
+        <Card>
+          <MetricsPanel
+            weelkyData={weeklyData}
+            nomthlyTrends={monthlyTrends}
+          />
+        </Card>
+
+        <Card>
+          <ActivityFeed
+            activities={activities}
+            onEditActivity={handleEditActivity}
+            onDeleteActivity={handleDeleteActivity}
+          />
+        </Card>
       </div>
-
-      <QuickActionButton />
-    </div>
+    </>
   );
 };
 
