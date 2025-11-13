@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-import { CatContext } from "../App";
+import { CatProvider } from "../contexts/CatContext";
 
 const CatSelector = () => {
-    const { selectedCat, setSelectedCat, catsList, setCatsList } = useContext(CatContext);
+    const { selectedCat, setSelectedCat, catsList, setCatsList } = useContext(CatProvider);
     const { isOpen, setIsOpen } = useState(false);
 
     // ToDO: Fetch cats from API if not already fetched

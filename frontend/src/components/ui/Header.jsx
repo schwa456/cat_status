@@ -1,6 +1,6 @@
 import React from 'react';
 import CatSelector from '../CatSelector';
-import AppIcon from './AppIcon'
+import AppIcon from '../AppIcon'
 
 const Header = ({ onMenuClick }) => {
   return (
@@ -16,7 +16,7 @@ const Header = ({ onMenuClick }) => {
         {/* Right Section: Menu Icon */}
         <div className="flex items-center">
           <button onClick={onMenuClick} className="p-2 focus:outline-none">
-            <AppIcon name="menu" size={24} />
+            <AppIcon name="Menu" size={24} />
           </button>
         </div>
 

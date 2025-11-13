@@ -3,11 +3,11 @@ import { NavLink } from "react-router-dom";
 import AppIcon from "../AppIcon";
 
 const navItems = [
-    { path: '/dashboard-overview', icon: 'user', label: 'Profile' },
-    { path: '/health-records-test-results', icon: 'file-text', label: 'Report' },
-    { path: 'activity-logging', icon: 'home', label: 'Home' },
-    { path: 'activity-reports-analytics', icon: 'bar-chart', label: 'Chart'},
-    { path: 'settings-preferences', icon: 'settings', label: 'Settings' },
+    { path: '/dashboard-overview', icon: 'User', label: 'Profile' },
+    { path: '/health-records-test-results', icon: 'FileText', label: 'Report' },
+    { path: '/', icon: 'Home', label: 'Home' },
+    { path: '/activity-reports-analytics', icon: 'BarChart', label: 'Chart'},
+    { path: '/settings-preferences', icon: 'Settings', label: 'Settings' },
 ]
 
 const BottomNav = () => {
@@ -23,7 +23,7 @@ const BottomNav = () => {
                             ${isActive ? 'text-blue-600' : 'text-gray-500' }`
                         }
                     >
-                        <AppIcon icon={item.icon} size={24}/>
+                        <AppIcon icon={item.icon} size={24} className="mb-1" />
                         <span className="label">{item.label}</span>
                     </NavLink>
                 ))}

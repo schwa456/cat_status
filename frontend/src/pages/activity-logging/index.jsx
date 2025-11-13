@@ -1,147 +1,198 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import Header from '../../components/ui/Header';
-import QuickActionButton from '../../components/ui/QuickActionButton';
-import ActivityTabs from './components/ActivityTabs';
-import CatSelector from './components/CatSelector';
-import FeedingForm from './components/FeedingForm';
-import BathroomForm from './components/BathroomForm';
-import PlayForm from './components/PlayForm';
-import HealthForm from './components/HealthForm';
-import QuickActions from './components/QuickActions';
-import RecentActivities from './components/RecentActivities';
-import { useCats } from "../../contexts/CatContext";
+import Card from '../../components/ui/Card';
+import Input from '../../components/ui/Input';
+import Button from '../../components/ui/Button';
+import { Icon } from '../../components/AppIcon';
 
 const ActivityLogging = () => {
-  const [activeTab, setActiveTab] = useState('feeding');
-  const [selectedCat, setSelectedCat] = useCats();
+  const [weight, setWeight] = useState('');
+  const [urineCount, setUrineCount] = useState('');
+  const [stoolCount, setStoolCount] = useState('');
+  const [vomitCount, setVomitCount] = useState('');
+  const [sleepTime, setSleepTime] = useState('');
+  const [playTime, setPlayTime] = useState('');
+  const [mealAmount, setMealAmount] = useState('');
+  const [notes, setNotes] = useState('');
 
-  const handleActivitySubmit = (activityData) => {
-    console.log('Activity logged:', activityData);
-    // Here you would typically save to your backend or local storage
-    // For now, we'll just log it to console
-  };
 
-  const handleQuickLog = (quickData) => {
-    console.log('Quick log:', quickData);
-    // Handle quick logging with default values
-    handleActivitySubmit(quickData);
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const renderActiveForm = () => {
-    const formProps = {
-      selectedCat,
-      onSubmit: handleActivitySubmit
-    };
-
-    switch (activeTab) {
-      case 'feeding':
-        return <FeedingForm {...formProps} />;
-      case 'bathroom':
-        return <BathroomForm {...formProps} />;
-      case 'play':
-        return <PlayForm {...formProps} />;
-      case 'health':
-        return <HealthForm {...formProps} />;
-      default:
-        return <FeedingForm {...formProps} />;
+    const activityData = {
+      weight,
+      urineCount,
+      stoolCount,
+      vomitCount,
+      sleepTime,
+      playTime,
+      mealAmount,
+      notes,
     }
+    console.log('Activity Logged: ', activityData);
+    //TODO: API 호출 혹은 상태 업데이트 로직 추가
   };
 
   return (
-    <>
-      <Helmet>
-        <title>Activity Logging - CatCare Tracker</title>
-        <meta name="description" content="Log your cat's daily activities including feeding, bathroom visits, play sessions, and health observations." />
-      </Helmet>
+      <>
+        <Helmet>
+          <title> 빠른 입력 - 고양이 건강 기록장 </title>
+          <meta name="description" content="고양이의 활동을 빠르게 기록합니다."/>
+        </Helmet>
 
-      <div className="min-h-screen bg-background">
-        <Header selectedCat={selectedCat} onCatChange={setSelectedCat} />
-        
-        <main className="container mx-auto px-4 py-6 max-w-6xl">
-          {/* Page Header */}
-          <div className="mb-6">
-            <h1 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">
-              Activity Logging
-            </h1>
-            <p className="text-muted-foreground">
-              Record your cat's daily activities to maintain comprehensive health and wellness tracking.
-            </p>
-          </div>
+        <Card>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">빠른 입력</h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Main Content */}
-            <div className="lg:col-span-2 space-y-6">
-              {/* Cat Selector */}
-              <CatSelector />
-
-              {/* Activity Form */}
-              <div className="bg-card border border-border rounded-lg shadow-soft overflow-hidden">
-                <ActivityTabs 
-                  activeTab={activeTab} 
-                  onTabChange={setActiveTab} 
+            <div className="grid gird-cols-1 gap-4">
+              {/* 몸무게 */}
+              <div className="flex items-end space-x-2">
+                <Input
+                  id="weight"
+                  label="체중 (kg)"
+                  type="number"
+                  value={weight}
+                  onChange={(e) => setWeight(e.target.value)}
+                  placeholder="예: 4.5"
+                  className="flex-grow"
                 />
-                
-                <div className="min-h-[500px]">
-                  {renderActiveForm()}
-                </div>
+                <span className="text-sm text-gray-600 mb-2">kg</span>
+              </div>
 
-                <QuickActions 
-                  selectedCat={selectedCat}
-                  onQuickLog={handleQuickLog}
-                  activeTab={activeTab}
+              {/* 소변 횟수 */}
+              <div className="flex items-end space-x-2">
+                <Input
+                  id="urineCount"
+                  label="소변 횟수"
+                  type="number"
+                  value={urineCount}
+                  onChange={(e) => setUrineCount(e.target.value)}
+                  placeholder="예: 3"
+                  className="flex-grow"
+                />
+                <span className="text-sm text-gray-600 mb-2">회</span>
+              </div>
+
+              {/* 대변 횟수 */}
+              <div className="flex items-end space-x-2">
+                <Input
+                  id="stoolCount"
+                  label="대변 횟수"
+                  type="number"
+                  value={stoolCount}
+                  onChange={(e) => setStoolCount(e.target.value)}
+                  placeholder="예: 2"
+                  className="flex-grow"
+                />
+                <span className="text-sm text-gray-600 mb-2">회</span>
+              </div>
+
+              {/* 구토 횟수 */}
+              <div className="flex items-end space-x-2">
+                <Input
+                  id="vomitCount"
+                  label="구토 횟수"
+                  type="number"
+                  value={vomitCount}
+                  onChange={(e) => setVomitCount(e.target.value)}
+                  placeholder="예: 2"
+                  className="flex-grow"
+                />
+                <span className="text-sm text-gray-600 mb-2">회</span>
+              </div>
+
+              {/* 수면 시간 */}
+              <div className="flex items-end space-x-2">
+                <Input
+                  id="sleepTime"
+                  label="수면 시간"
+                  type="number"
+                  value={sleepTime}
+                  onChange={(e) => setSleepTime(e.target.value)}
+                  placeholder="예: 30"
+                  className="flex-grow"
+                />
+                <span className="text-sm text-gray-600 mb-2">분</span>
+              </div>
+
+              {/* 놀이 시간 */}
+              <div className="flex items-end space-x-2">
+                <Input
+                  id="playTime"
+                  label="놀이 시간"
+                  type="number"
+                  value={playTime}
+                  onChange={(e) => setPlayTime(e.target.value)}
+                  placeholder="예: 30"
+                  className="flex-grow"
+                />
+                <span className="text-sm text-gray-600 mb-2">분</span>
+              </div>
+
+              {/* 식사량 */}
+              <div className="flex items-end space-x-2">
+                <Input
+                  id="mealAmount"
+                  label="식사량(g)"
+                  type="number"
+                  value={mealAmount}
+                  onChange={(e) => setMealAmount(e.target.value)}
+                  placeholder="예: 30"
+                  className="flex-grow"
+                />
+                <span className="text-sm text-gray-600 mb-2">g</span>
+              </div>
+
+              {/* 특이 사항 */}
+              <div className="flex items-end space-x-2">
+                <Input
+                  id="notes"
+                  label="특이 사항"
+                  type="text"
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  placeholder="특이사항을 입력하세요."
                 />
               </div>
+
             </div>
 
-            {/* Sidebar */}
-            <div className="space-y-6">
-              <RecentActivities selectedCat={selectedCat} />
-              
-              {/* Activity Summary Card */}
-              <div className="bg-card border border-border rounded-lg p-4">
-                <h3 className="font-semibold text-foreground mb-3">Today's Summary</h3>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">Meals</span>
-                    <span className="text-sm font-medium text-success">2/3</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">Bathroom</span>
-                    <span className="text-sm font-medium text-primary">4 visits</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">Play Time</span>
-                    <span className="text-sm font-medium text-warning">45 min</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">Health Checks</span>
-                    <span className="text-sm font-medium text-secondary">1</span>
-                  </div>
-                </div>
+            <Button type="submit" fullWidth>
+              입력하기
+            </Button>
+          </form>
+        </Card>
+
+        <div className="mt-6">
+          <Card>
+            <h2 className="text-xl font-bold text-gray-800 mb-4">최근 일주일 요약</h2>
+            <div className="grid grid-cols-3 gap-4 text-center">
+
+              <div>
+                {/* 몸무게 아이콘 */}
+                <Icon name="Scale" size={32} className="mx-auto mb-2 text-blue-500" />
+                <p className="text-xl font-semibold text-gray-800">5.2kg</p>
+                <p className="text-xs text-gray-500">몸무게</p>
               </div>
 
-              {/* Tips Card */}
-              <div className="bg-accent/10 border border-accent/20 rounded-lg p-4">
-                <h3 className="font-semibold text-foreground mb-2 flex items-center space-x-2">
-                  <span>💡</span>
-                  <span>Logging Tips</span>
-                </h3>
-                <ul className="text-sm text-muted-foreground space-y-2">
-                  <li>• Log activities immediately for accuracy</li>
-                  <li>• Use quick actions for routine activities</li>
-                  <li>• Add notes for unusual behaviors</li>
-                  <li>• Take photos for health observations</li>
-                </ul>
+              <div>
+                {/* 소변 아이콘 */}
+                <Icon name="Droplet" size={32} className="mx-auto mb-2 text-blue-500" />
+                <p className="text-xl font-semibold text-gray-800">21회</p>
+                <p className="text-xs text-gray-500">소변 횟수</p>
+              </div>
+
+              <div>
+                {/* 대변 아이콘 */}
+                <Icon name="Feather" size={32} className="mx-auto mb-2 text-blue-500" />
+                <p className="text-xl font-semibold text-gray-800">14회</p>
+                <p className="text-xs text-gray-500">대변 횟수</p>
               </div>
             </div>
-          </div>
-        </main>
-
-        <QuickActionButton />
-      </div>
-    </>
+          </Card>
+        </div>
+      </>
   );
-};
+}
 
 export default ActivityLogging;
