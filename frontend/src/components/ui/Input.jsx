@@ -15,7 +15,7 @@ const Input = React.forwardRef(({
     const inputId = id || `input-${Math.random()?.toString(36)?.substr(2, 9)}`;
 
     // Base input classes
-    const baseInputClasses = "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
+    const baseInputClasses = "flex h-10 w-full rounded-md border-none bg-gray-100 px-3 py-2 text-sm ring-offset-white placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue disabled:cursor-not-allowed disabled:opacity-50";
 
     // Checkbox-specific styles
     if (type === "checkbox") {
@@ -51,17 +51,17 @@ const Input = React.forwardRef(({
 
     // For regular inputs with wrapper structure
     return (
-        <div className="space-y-2">
+        <div className="w-full space-y-1.5">
             {label && (
                 <label
                     htmlFor={inputId}
                     className={cn(
-                        "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
-                        error ? "text-destructive" : "text-foreground"
+                        "text-sm font-medium text-gray-700",
+                        error ? "text-red-600" : ""
                     )}
                 >
                     {label}
-                    {required && <span className="text-destructive ml-1">*</span>}
+                    {required && <span className="text-red-600 ml-1">*</span>}
                 </label>
             )}
 
@@ -69,7 +69,7 @@ const Input = React.forwardRef(({
                 type={type}
                 className={cn(
                     baseInputClasses,
-                    error && "border-destructive focus-visible:ring-destructive",
+                    error && "ring-2 ring-red-500",
                     className
                 )}
                 ref={ref}
@@ -78,13 +78,13 @@ const Input = React.forwardRef(({
             />
 
             {description && !error && (
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs text-gray-500">
                     {description}
                 </p>
             )}
 
             {error && (
-                <p className="text-sm text-destructive">
+                <p className="text-xs text-dred-600">
                     {error}
                 </p>
             )}

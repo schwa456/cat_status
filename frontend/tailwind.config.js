@@ -63,6 +63,8 @@ export default {
           DEFAULT: "var(--color-error)", // red-500
           foreground: "var(--color-error-foreground)", // white
         },
+        'kakao': '#FEE500',
+        'naver': '#03C75A',
       },
       borderRadius: {
         lg: "var(--radius)",
