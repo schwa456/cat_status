@@ -10,17 +10,11 @@ import PlayForm from './components/PlayForm';
 import HealthForm from './components/HealthForm';
 import QuickActions from './components/QuickActions';
 import RecentActivities from './components/RecentActivities';
+import { useCats } from "../../contexts/CanContext";
 
 const ActivityLogging = () => {
   const [activeTab, setActiveTab] = useState('feeding');
-  const [selectedCat, setSelectedCat] = useState({
-    id: 1,
-    name: 'Whiskers',
-    photo: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=400&fit=crop&crop=face',
-    breed: 'Persian',
-    age: '3 years',
-    lastActivity: '2 hours ago'
-  });
+  const [selectedCat, setSelectedCat] = useCats();
 
   const handleActivitySubmit = (activityData) => {
     console.log('Activity logged:', activityData);
@@ -79,10 +73,7 @@ const ActivityLogging = () => {
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-6">
               {/* Cat Selector */}
-              <CatSelector 
-                selectedCat={selectedCat} 
-                onCatChange={setSelectedCat} 
-              />
+              <CatSelector />
 
               {/* Activity Form */}
               <div className="bg-card border border-border rounded-lg shadow-soft overflow-hidden">

@@ -1,37 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Icon from '../../../components/AppIcon';
 import Image from '../../../components/AppImage';
+import {useCats} from "../../../contexts/CanContext";
 
-const CatSelector = ({ selectedCat, onCatChange }) => {
+const CatSelector = () => {
+  const { cats, selectedCat, selectCat } = useCats();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
-
-  const mockCats = [
-    { 
-      id: 1, 
-      name: 'Whiskers', 
-      photo: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=400&fit=crop&crop=face',
-      breed: 'Persian',
-      age: '3 years',
-      lastActivity: '2 hours ago'
-    },
-    { 
-      id: 2, 
-      name: 'Luna', 
-      photo: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&h=400&fit=crop&crop=face',
-      breed: 'Siamese',
-      age: '2 years',
-      lastActivity: '4 hours ago'
-    },
-    { 
-      id: 3, 
-      name: 'Shadow', 
-      photo: 'https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?w=400&h=400&fit=crop&crop=face',
-      breed: 'Maine Coon',
-      age: '5 years',
-      lastActivity: '1 day ago'
-    }
-  ];
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -45,11 +20,11 @@ const CatSelector = ({ selectedCat, onCatChange }) => {
   }, []);
 
   const handleCatSelect = (cat) => {
-    onCatChange(cat);
+    selectCat(cat)
     setIsOpen(false);
   };
 
-  const currentCat = selectedCat || mockCats?.[0];
+  const currentCat = selectedCat || cats?.[0];
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -77,7 +52,7 @@ const CatSelector = ({ selectedCat, onCatChange }) => {
       {isOpen && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-popover border border-border rounded-lg shadow-elevated z-50">
           <div className="p-2">
-            {mockCats?.map((cat) => (
+            {cats?.map((cat) => (
               <button
                 key={cat?.id}
                 onClick={() => handleCatSelect(cat)}

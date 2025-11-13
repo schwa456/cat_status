@@ -10,15 +10,15 @@ import ActivityReportsAnalytics from './pages/activity-reports-analytics';
 import UserRegistrationLogin from './pages/user-registration-login';
 import ActivityLogging from './pages/activity-logging';
 
-const Routes = () => {
+const AppRoutes = () => {
     return (
         <BrowserRouter>
             <ErrorBoundary>
                 <ScrollToTop />
                 <RouterRoutes>
                     <Route path="/" element={<ActivityLogging />} />
-                    <Route path={"/settings-preferences"} element={<SettingsPreferences/>} />
-                    <Route path={"/dashboard-overview"} element={<DashboardOverview/>} />
+                    <Route path="/settings-preferences" element={<SettingsPreferences/>} />
+                    <Route path="/dashboard-overview" element={<DashboardOverview/>} />
                     <Route path="/health-records-test-results" element={<HealthRecordsTestResults />} />
                     <Route path="/activity-reports-analytics" element={<ActivityReportsAnalytics />} />
                     <Route path="/user-registration-login" element={<UserRegistrationLogin />} />
@@ -30,4 +30,4 @@ const Routes = () => {
     );
 };
 
-export default Routes;
+export default AppRoutes;

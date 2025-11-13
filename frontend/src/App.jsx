@@ -1,9 +1,12 @@
 import React from "react";
-import Routes from "./Routes";
+import AppRoutes from "./Routes";
+import { CatProvider } from "./contexts/CanContext";
 
 function App() {
     return (
-        <Routes />
+        <CatProvider>
+            <AppRoutes />
+        </CatProvider>
     );
 }
 
