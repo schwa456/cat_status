@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Icon from '../../../components/AppIcon';
 import Image from '../../../components/AppImage';
-import {useCats} from "../../../contexts/CanContext";
+import {useCats} from "../../../contexts/CatContext";
 
 const CatSelector = () => {
   const { cats, selectedCat, selectCat } = useCats();

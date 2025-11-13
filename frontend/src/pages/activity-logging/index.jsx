@@ -10,7 +10,7 @@ import PlayForm from './components/PlayForm';
 import HealthForm from './components/HealthForm';
 import QuickActions from './components/QuickActions';
 import RecentActivities from './components/RecentActivities';
-import { useCats } from "../../contexts/CanContext";
+import { useCats } from "../../contexts/CatContext";
 
 const ActivityLogging = () => {
   const [activeTab, setActiveTab] = useState('feeding');
