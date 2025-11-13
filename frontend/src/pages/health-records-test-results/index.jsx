@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
-import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar';
-import QuickActionButton from '../../components/ui/QuickActionButton';
-import Icon from '../../components/AppIcon';
+
+import { Icon } from '../../components/AppIcon';
 import Button from '../../components/ui/Button';
-import HealthRecordCard from './components/HealthRecordCard';
-import AddHealthRecordModal from './components/AddHealthRecordModal';
-import HealthRecordFilters from './components/HealthRecordFilters';
-import HealthTrendsChart from './components/HealthTrendsChart';
-import HealthRecordDetailModal from './components/HealthRecordDetailModal';
+import Card from '../../components/ui/Card';
+
+import HealthRecordCard from "./components/HealthRecordCard";
+import AddHealthRecordModal from "./components/AddHealthRecordModal";
+import HealthRecordFilters from "./components/HealthRecordFilters";
+import HealthTrendsChart from "./components/HealthTrendsChart";
+import HealthRecordDetailModal from "./components/HealthRecordDetailModal";
+import healthRecordFilters from "./components/HealthRecordFilters";
 
 const HealthRecordsTestResults = () => {
   const location = useLocation();
   const [selectedCat, setSelectedCat] = useState(null);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isAddModelOpen, setIsAddModalOpen] = useState(false);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [healthRecords, setHealthRecords] = useState([]);
@@ -29,19 +30,16 @@ const HealthRecordsTestResults = () => {
     veterinarian: '',
     showAbnormalOnly: false,
     hasAttachments: false,
-    upcomingVaccinations: false
+    upcomingVaccinations: false,
   });
-  const [viewMode, setViewMode] = useState('list'); // 'list', 'chart'
 
-  // Mock cats data
   const mockCats = [
     { id: 1, name: 'Whiskers', photo: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400', lastActivity: '2 hours ago' },
     { id: 2, name: 'Luna', photo: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400', lastActivity: '4 hours ago' },
     { id: 3, name: 'Shadow', photo: 'https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400', lastActivity: '1 day ago' }
   ];
 
-  // Mock health records data
-  const mockHealthRecords = [
+   const mockHealthRecords = [
     {
       id: 1,
       catId: 1,
@@ -173,26 +171,24 @@ const HealthRecordsTestResults = () => {
   ];
 
   useEffect(() => {
-    // Set default selected cat
-    if (mockCats?.length > 0 && !selectedCat) {
-      setSelectedCat(mockCats?.[0]);
+    // Set Default Selected Cat
+    if (mockCats?.length > 0 && !selectedCat){
+      setSelectedCat(mockCats[0]);
     }
     
     // Set mock health records
     setHealthRecords(mockHealthRecords);
-
-    // Check for URL parameters to open add modal
+    
     const urlParams = new URLSearchParams(location.search);
     if (urlParams?.get('action') === 'new') {
       setIsAddModalOpen(true);
-    }
-  }, [location?.search, selectedCat]);
+    } 
+  }, [location.search, mockCats, mockHealthRecords, selectedCat]);
 
-  // Filter and sort health records
-  const filteredRecords = healthRecords?.filter(record => {
+const filteredRecords = healthRecords?.filter(record => {
     // Filter by selected cat
     if (selectedCat && record?.catId !== selectedCat?.id) return false;
-    
+
     // Search filter
     if (filters?.search) {
       const searchTerm = filters?.search?.toLowerCase();
@@ -203,43 +199,43 @@ const HealthRecordsTestResults = () => {
         return false;
       }
     }
-    
+
     // Type filter
     if (filters?.type !== 'all' && record?.type !== filters?.type) return false;
-    
+
     // Priority filter
     if (filters?.priority !== 'all' && record?.priority !== filters?.priority) return false;
-    
+
     // Date range filter
     if (filters?.dateFrom) {
       const recordDate = new Date(record.date);
       const fromDate = new Date(filters.dateFrom);
       if (recordDate < fromDate) return false;
     }
-    
+
     if (filters?.dateTo) {
       const recordDate = new Date(record.date);
       const toDate = new Date(filters.dateTo);
       toDate?.setHours(23, 59, 59, 999); // End of day
       if (recordDate > toDate) return false;
     }
-    
+
     // Veterinarian filter
     if (filters?.veterinarian) {
       const vetTerm = filters?.veterinarian?.toLowerCase();
       if (!record?.veterinarian?.toLowerCase()?.includes(vetTerm)) return false;
     }
-    
+
     // Abnormal results filter
     if (filters?.showAbnormalOnly) {
       if (record?.type !== 'blood-work' || !record?.testResults) return false;
       const hasAbnormal = record?.testResults?.some(test => test?.status !== 'normal');
       if (!hasAbnormal) return false;
     }
-    
+
     // Has attachments filter
     if (filters?.hasAttachments && !record?.hasAttachments) return false;
-    
+
     // Upcoming vaccinations filter
     if (filters?.upcomingVaccinations) {
       if (record?.type !== 'vaccination' || !record?.vaccineDetails?.nextDue) return false;
@@ -248,7 +244,7 @@ const HealthRecordsTestResults = () => {
       const thirtyDaysFromNow = new Date(now.getTime() + (30 * 24 * 60 * 60 * 1000));
       if (nextDue > thirtyDaysFromNow) return false;
     }
-    
+
     return true;
   })?.sort((a, b) => {
     switch (filters?.sortBy) {
@@ -270,269 +266,89 @@ const HealthRecordsTestResults = () => {
     setHealthRecords(prev => [record, ...prev]);
   };
 
-  const handleEditRecord = (record) => {
-    setSelectedRecord(record);
-    setIsAddModalOpen(true);
-  };
-
-  const handleDeleteRecord = (record) => {
-    if (window.confirm('Are you sure you want to delete this health record?')) {
-      setHealthRecords(prev => prev?.filter(r => r?.id !== record?.id));
-    }
-  };
-
-  const handleViewDetails = (record) => {
+  const hadleViewDetails = (record) => {
     setSelectedRecord(record);
     setIsDetailModalOpen(true);
   };
 
-  const handleClearFilters = () => {
-    setFilters({
-      search: '',
-      type: 'all',
-      priority: 'all',
-      sortBy: 'date-desc',
-      dateFrom: '',
-      dateTo: '',
-      veterinarian: '',
-      showAbnormalOnly: false,
-      hasAttachments: false,
-      upcomingVaccinations: false
-    });
-  };
-
-  const handleExportRecords = () => {
-    const exportData = filteredRecords?.map(record => ({
-      catName: record?.catName,
-      type: record?.type,
-      title: record?.title,
-      date: record?.date,
-      summary: record?.summary,
-      veterinarian: record?.veterinarian,
-      priority: record?.priority
-    }));
-
-    const dataStr = JSON.stringify(exportData, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `health-records-${selectedCat?.name || 'all-cats'}-${new Date()?.toISOString()?.split('T')?.[0]}.json`;
-    link?.click();
-    URL.revokeObjectURL(url);
-  };
-
   return (
-    <div className="min-h-screen bg-background">
-      <Header 
-        selectedCat={selectedCat} 
-        onCatChange={setSelectedCat}
-        showCatSelector={true}
-      />
-      <div className="flex">
-        <Sidebar 
-          isCollapsed={isSidebarCollapsed}
-          onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-        />
-        
-        <main className={`flex-1 transition-all duration-300 ${
-          isSidebarCollapsed ? 'ml-16' : 'ml-64'
-        }`}>
-          <div className="p-6 space-y-6">
-            {/* Page Header */}
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-2xl font-semibold text-foreground">Health Records & Test Results</h1>
-                <p className="text-muted-foreground">
-                  Comprehensive medical history for {selectedCat?.name || 'your cats'}
-                </p>
-              </div>
-              
-              <div className="flex items-center space-x-3">
-                <div className="flex items-center space-x-2">
-                  <Button
-                    variant={viewMode === 'list' ? 'default' : 'outline'}
-                    size="sm"
-                    iconName="List"
-                    onClick={() => setViewMode('list')}
-                  >
-                    List
-                  </Button>
-                  <Button
-                    variant={viewMode === 'chart' ? 'default' : 'outline'}
-                    size="sm"
-                    iconName="TrendingUp"
-                    onClick={() => setViewMode('chart')}
-                  >
-                    Trends
-                  </Button>
-                </div>
-                
-                <Button
-                  variant="outline"
-                  iconName="Download"
-                  onClick={handleExportRecords}
-                  disabled={filteredRecords?.length === 0}
-                >
-                  Export
-                </Button>
-                
-                <Button
-                  iconName="Plus"
-                  onClick={() => setIsAddModalOpen(true)}
-                >
-                  Add Record
-                </Button>
-              </div>
+      <>
+        <Helmet>
+          <title>건강 기록 및 검사 결과 - 고양이 건강 기록장</title>
+          <meta name="description" content="고양이의 건강 기록과 검사 결과를 관리하고 시각화하는 페이지입니다." />
+        </Helmet>
+
+        <div className="space-y-6">
+          <Card>
+            <h3 className="text-lg font-bold text-gray-800 mb-4">혈액 검사 결과 입력하기</h3>
+            <div className="flex flex-col space-y-3">
+              <Button fullWidth onClick={() => setIsAddModalOpen(true)}>
+                직접 입력
+              </Button>
+              <Button fullWidth variant="outline">
+                검사 결과 파일 업로드
+              </Button>
             </div>
+          </Card>
 
-            {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="bg-card p-4 rounded-lg border border-border shadow-soft">
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <Icon name="FileText" size={20} className="text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Total Records</p>
-                    <p className="text-xl font-semibold text-foreground">
-                      {selectedCat ? healthRecords?.filter(r => r?.catId === selectedCat?.id)?.length : healthRecords?.length}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-card p-4 rounded-lg border border-border shadow-soft">
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-red-100 rounded-lg">
-                    <Icon name="Droplets" size={20} className="text-red-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Blood Tests</p>
-                    <p className="text-xl font-semibold text-foreground">
-                      {healthRecords?.filter(r => r?.type === 'blood-work' && (!selectedCat || r?.catId === selectedCat?.id))?.length}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-card p-4 rounded-lg border border-border shadow-soft">
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-green-100 rounded-lg">
-                    <Icon name="Shield" size={20} className="text-green-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Vaccinations</p>
-                    <p className="text-xl font-semibold text-foreground">
-                      {healthRecords?.filter(r => r?.type === 'vaccination' && (!selectedCat || r?.catId === selectedCat?.id))?.length}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-card p-4 rounded-lg border border-border shadow-soft">
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-orange-100 rounded-lg">
-                    <Icon name="AlertTriangle" size={20} className="text-orange-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">High Priority</p>
-                    <p className="text-xl font-semibold text-foreground">
-                      {healthRecords?.filter(r => r?.priority === 'high' && (!selectedCat || r?.catId === selectedCat?.id))?.length}
-                    </p>
-                  </div>
-                </div>
-              </div>
+          <Card>
+            <h3 className="text=lg font-bold text-gray-800 mb-4">최근 혈액검사 결과</h3>
+            <div className="space-y-3">
+              {filteredRecords?.length > 0 ? (
+                  filteredRecords?.slice(0, 3)?.map((record) => (
+                      <HealthRecordCard
+                        key={record?.id}
+                        record={record}
+                        onViewDetails={hadleViewDetails}
+                      />
+                  ))
+                ) : (
+                    <p className="text-gray-500 text-center">기록된 혈액검사 결과가 없습니다.</p>
+                )}
             </div>
-
-            {/* Content Area */}
-            {viewMode === 'list' ? (
-              <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                {/* Filters Sidebar */}
-                <div className="lg:col-span-1">
-                  <HealthRecordFilters
-                    filters={filters}
-                    onFiltersChange={setFilters}
-                    onClearFilters={handleClearFilters}
-                  />
+            {filteredRecords?.length > 3 && (
+                <div className="mt-4 text-center">
+                  <Button variant="link">모든 기록 보기</Button>
                 </div>
-
-                {/* Records List */}
-                <div className="lg:col-span-3">
-                  {filteredRecords?.length === 0 ? (
-                    <div className="bg-card border border-border rounded-lg shadow-soft p-12 text-center">
-                      <Icon name="FileText" size={48} className="text-muted-foreground mx-auto mb-4" />
-                      <h3 className="text-lg font-medium text-foreground mb-2">No Health Records Found</h3>
-                      <p className="text-muted-foreground mb-6">
-                        {filters?.search || filters?.type !== 'all' || filters?.priority !== 'all' ?'No records match your current filters. Try adjusting your search criteria.'
-                          : `Start building ${selectedCat?.name || 'your cat'}'s health history by adding medical records, test results, and veterinary visits.`
-                        }
-                      </p>
-                      <div className="flex items-center justify-center space-x-3">
-                        {(filters?.search || filters?.type !== 'all' || filters?.priority !== 'all') && (
-                          <Button variant="outline" onClick={handleClearFilters}>
-                            Clear Filters
-                          </Button>
-                        )}
-                        <Button iconName="Plus" onClick={() => setIsAddModalOpen(true)}>
-                          Add First Record
-                        </Button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm text-muted-foreground">
-                          Showing {filteredRecords?.length} of {healthRecords?.filter(r => !selectedCat || r?.catId === selectedCat?.id)?.length} records
-                        </p>
-                      </div>
-                      
-                      {filteredRecords?.map((record) => (
-                        <HealthRecordCard
-                          key={record?.id}
-                          record={record}
-                          onEdit={handleEditRecord}
-                          onDelete={handleDeleteRecord}
-                          onViewDetails={handleViewDetails}
-                        />
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ) : (
-              <div className="space-y-6">
-                <HealthTrendsChart 
-                  records={healthRecords?.filter(r => !selectedCat || r?.catId === selectedCat?.id)}
-                  selectedCat={selectedCat}
-                />
-              </div>
             )}
-          </div>
-        </main>
-      </div>
-      {/* Modals */}
-      <AddHealthRecordModal
-        isOpen={isAddModalOpen}
-        onClose={() => {
-          setIsAddModalOpen(false);
-          setSelectedRecord(null);
-        }}
-        onSave={handleAddRecord}
-        selectedCat={selectedCat}
-        editRecord={selectedRecord}
-      />
-      <HealthRecordDetailModal
-        isOpen={isDetailModalOpen}
-        onClose={() => {
-          setIsDetailModalOpen(false);
-          setSelectedRecord(null);
-        }}
-        record={selectedRecord}
-      />
-      <QuickActionButton />
-    </div>
+          </Card>
+
+          <Card>
+            <h3 className="text-lg font-bold text-gray-800 mb-4">최근 혈액검사 세부 결과 - CBC - RBC</h3>
+            <div className="space-y-2">
+              <p className="text-sm text-gray-700">최근 검사 일자: 25. 9. 9.</p>
+              <p className="text-sm text-gray-700">최근 검사 병원: 조이 동물 병원</p>
+              <p className="text-sm font-semibold text-gray-800 mt-4">최근 검사 결과(종합 소견)</p>
+              <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                <li> 올해 안으로 스케일링, 치과 탐사선 치료 진행</li>
+                <li>아조탈 복용 시작, 신장 그랜드 검진으로 재평가</li>
+                <li>미세 단백뇨/혈압/sdma/GF(조기출검사)</li>
+              </ul>
+            </div>
+          </Card>
+        </div>
+
+        <AddHealthRecordModal
+          isOpen={isAddModelOpen}
+          onClose={() => {
+            setIsAddModalOpen(false);
+            setSelectedRecord(null);
+          }}
+          onSave={handleAddRecord}
+          selectedCat={selectedCat}
+          editRecord={selectedRecord}
+        />
+
+        <HealthRecordDetailModal
+          isOpen={isDetailModalOpen}
+          onClose={() => {
+            setIsDetailModalOpen(false);
+            setSelectedRecord(null);
+          }}
+          record={selectedRecord}
+        />
+      </>
   );
 };
 
-export default HealthRecordsTestResults;
+export default HealthRecordsTestResults
