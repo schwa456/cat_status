@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import { CatProvider } from "../contexts/CatContext";
+import { CatContext } from "../contexts/CatContext";
 
 const CatSelector = () => {
-    const { selectedCat, setSelectedCat, catsList, setCatsList } = useContext(CatProvider);
-    const { isOpen, setIsOpen } = useState(false);
+    const { selectedCat, setSelectedCat, catsList, setCatsList } = useContext(CatContext);
+    const [isOpen, setIsOpen] = useState(false);
 
-    // ToDO: Fetch cats from API if not already fetched
+    // TODO: Fetch cats from API if not already fetched
     useEffect(() => {
         const dummyCats = [
         { id: 'cat1', name: '나비', image: 'https://via.placeholder.com/32/FFC0CB/FFFFFF?text=N' },

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Header from '../../components/ui/Header';
+import Header from '../../components/Header';
 import QuickActionButton from '../../components/ui/QuickActionButton';
 import AccountSettings from './components/AccountSettings';
 import NotificationSettings from './components/NotificationSettings';

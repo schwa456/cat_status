@@ -45,7 +45,7 @@ const ActivityLogging = () => {
             <h2 className="text-xl font-bold text-gray-800 mb-4">빠른 입력</h2>
 
             <div className="grid gird-cols-1 gap-4">
-              {/* 몸무게 */}
+
               <div className="flex items-end space-x-2">
                 <Input
                   id="weight"
@@ -59,7 +59,7 @@ const ActivityLogging = () => {
                 <span className="text-sm text-gray-600 mb-2">kg</span>
               </div>
 
-              {/* 소변 횟수 */}
+
               <div className="flex items-end space-x-2">
                 <Input
                   id="urineCount"
@@ -73,7 +73,7 @@ const ActivityLogging = () => {
                 <span className="text-sm text-gray-600 mb-2">회</span>
               </div>
 
-              {/* 대변 횟수 */}
+
               <div className="flex items-end space-x-2">
                 <Input
                   id="stoolCount"
@@ -87,7 +87,7 @@ const ActivityLogging = () => {
                 <span className="text-sm text-gray-600 mb-2">회</span>
               </div>
 
-              {/* 구토 횟수 */}
+
               <div className="flex items-end space-x-2">
                 <Input
                   id="vomitCount"
@@ -101,7 +101,7 @@ const ActivityLogging = () => {
                 <span className="text-sm text-gray-600 mb-2">회</span>
               </div>
 
-              {/* 수면 시간 */}
+
               <div className="flex items-end space-x-2">
                 <Input
                   id="sleepTime"
@@ -115,7 +115,7 @@ const ActivityLogging = () => {
                 <span className="text-sm text-gray-600 mb-2">분</span>
               </div>
 
-              {/* 놀이 시간 */}
+
               <div className="flex items-end space-x-2">
                 <Input
                   id="playTime"
@@ -129,7 +129,7 @@ const ActivityLogging = () => {
                 <span className="text-sm text-gray-600 mb-2">분</span>
               </div>
 
-              {/* 식사량 */}
+
               <div className="flex items-end space-x-2">
                 <Input
                   id="mealAmount"
@@ -143,7 +143,7 @@ const ActivityLogging = () => {
                 <span className="text-sm text-gray-600 mb-2">g</span>
               </div>
 
-              {/* 특이 사항 */}
+
               <div className="flex items-end space-x-2">
                 <Input
                   id="notes"
@@ -156,12 +156,12 @@ const ActivityLogging = () => {
               </div>
 
             </div>
-
             <Button type="submit" fullWidth>
               입력하기
             </Button>
           </form>
         </Card>
+
 
         <div className="mt-6">
           <Card>
@@ -169,21 +169,18 @@ const ActivityLogging = () => {
             <div className="grid grid-cols-3 gap-4 text-center">
 
               <div>
-                {/* 몸무게 아이콘 */}
                 <Icon name="Scale" size={32} className="mx-auto mb-2 text-blue-500" />
                 <p className="text-xl font-semibold text-gray-800">5.2kg</p>
                 <p className="text-xs text-gray-500">몸무게</p>
               </div>
 
               <div>
-                {/* 소변 아이콘 */}
                 <Icon name="Droplet" size={32} className="mx-auto mb-2 text-blue-500" />
                 <p className="text-xl font-semibold text-gray-800">21회</p>
                 <p className="text-xs text-gray-500">소변 횟수</p>
               </div>
 
               <div>
-                {/* 대변 아이콘 */}
                 <Icon name="Feather" size={32} className="mx-auto mb-2 text-blue-500" />
                 <p className="text-xl font-semibold text-gray-800">14회</p>
                 <p className="text-xs text-gray-500">대변 횟수</p>

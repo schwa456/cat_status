@@ -1,6 +1,6 @@
 import React from 'react';
-import CatSelector from '../CatSelector';
-import AppIcon from '../AppIcon'
+import CatSelector from './CatSelector';
+import AppIcon from './AppIcon'
 
 const Header = ({ onMenuClick }) => {
   return (

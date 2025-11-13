@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Icon from '../AppIcon';
+import Icon from './AppIcon';
 
 const Sidebar = ({ isCollapsed = false, onToggleCollapse }) => {
   const location = useLocation();

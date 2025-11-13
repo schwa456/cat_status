@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Header from '../../components/ui/Header';
-import Sidebar from '../../components/ui/Sidebar';
+import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
 import QuickActionButton from '../../components/ui/QuickActionButton';
 import Icon from '../../components/AppIcon';
 import Button from '../../components/ui/Button';

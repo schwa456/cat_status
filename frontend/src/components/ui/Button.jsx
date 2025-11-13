@@ -54,7 +54,7 @@ const Button = React.forwardRef(({
     disabled = false,
     ...props
 }, ref) => {
-    const Comp = asChild ? Slot : "Button";
+    const Comp = asChild ? Slot : "button";
 
     // Icon size mapping based on button size
     const iconSizeMap = {
