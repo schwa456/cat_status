@@ -9,11 +9,11 @@ const CatProfileCard = ({ cat, onEditProfile }) => {
     const ageInMonths = (today?.getFullYear() - birth?.getFullYear()) * 12 + today?.getMonth() - birth?.getMonth();
     
     if (ageInMonths < 12) {
-      return `${ageInMonths} months old`;
+      return `${ageInMonths} 개월`;
     } else {
       const years = Math.floor(ageInMonths / 12);
       const months = ageInMonths % 12;
-      return months > 0 ? `${years}y ${months}m old` : `${years} years old`;
+      return months > 0 ? `${years}살 ${months} 개월` : `${years} 살`;
     }
   };
 
@@ -33,13 +33,13 @@ const CatProfileCard = ({ cat, onEditProfile }) => {
     const diffInMinutes = Math.floor((now - lastActivity) / (1000 * 60));
     
     if (diffInMinutes < 60) {
-      return `${diffInMinutes} minutes ago`;
+      return `${diffInMinutes} 분 전`;
     } else if (diffInMinutes < 1440) {
       const hours = Math.floor(diffInMinutes / 60);
-      return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+      return `${hours} 시간 전`;
     } else {
       const days = Math.floor(diffInMinutes / 1440);
-      return `${days} day${days > 1 ? 's' : ''} ago`;
+      return `${days} 일 전`;
     }
   };
 
@@ -78,7 +78,7 @@ const CatProfileCard = ({ cat, onEditProfile }) => {
         <button
           onClick={() => onEditProfile(cat)}
           className="p-2 rounded-lg hover:bg-muted transition-colors duration-200"
-          title="Edit profile"
+          title="프로필 수정"
         >
           <Icon name="Edit2" size={18} className="text-muted-foreground" />
         </button>
@@ -86,25 +86,25 @@ const CatProfileCard = ({ cat, onEditProfile }) => {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
         <div className="text-center p-3 bg-muted/50 rounded-lg">
           <div className="text-lg font-semibold text-foreground">{cat?.weight}</div>
-          <div className="text-xs text-muted-foreground">Weight (lbs)</div>
+          <div className="text-xs text-muted-foreground">몸무게 (kg)</div>
         </div>
         <div className="text-center p-3 bg-muted/50 rounded-lg">
           <div className="text-lg font-semibold text-primary">{cat?.todayMeals}</div>
-          <div className="text-xs text-muted-foreground">Meals Today</div>
+          <div className="text-xs text-muted-foreground">오늘 식사량</div>
         </div>
         <div className="text-center p-3 bg-muted/50 rounded-lg">
           <div className="text-lg font-semibold text-accent">{cat?.playTime}</div>
-          <div className="text-xs text-muted-foreground">Play Time (min)</div>
+          <div className="text-xs text-muted-foreground">오늘 놀이 시간</div>
         </div>
         <div className="text-center p-3 bg-muted/50 rounded-lg">
           <div className="text-lg font-semibold text-secondary">{cat?.healthScore}</div>
-          <div className="text-xs text-muted-foreground">Health Score</div>
+          <div className="text-xs text-muted-foreground">건강 점수</div>
         </div>
       </div>
       <div className="flex items-center justify-between pt-4 border-t border-border">
         <div className="flex items-center space-x-2">
           <Icon name="Clock" size={16} className="text-muted-foreground" />
-          <span className="text-sm text-muted-foreground">Last activity:</span>
+          <span className="text-sm text-muted-foreground">마지막 활동 입력:</span>
           <span className={`text-sm font-medium ${getLastActivityColor(cat?.lastActivity)}`}>
             {formatLastActivity(cat?.lastActivity)}
           </span>
@@ -112,7 +112,7 @@ const CatProfileCard = ({ cat, onEditProfile }) => {
         
         <div className="flex items-center space-x-1">
           <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
-          <span className="text-xs text-muted-foreground">Active</span>
+          <span className="text-xs text-muted-foreground">활동 중</span>
         </div>
       </div>
     </div>

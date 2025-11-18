@@ -59,12 +59,12 @@ const RemindersPanel = ({ reminders, onCompleteReminder, onSnoozeReminder, onAdd
     const diffInMinutes = Math.floor((reminderTime - now) / (1000 * 60));
     
     if (diffInMinutes < 60) {
-      return `in ${diffInMinutes} minutes`;
+      return `${diffInMinutes} 분 후`;
     } else if (diffInMinutes < 1440) {
       const hours = Math.floor(diffInMinutes / 60);
-      return `in ${hours} hour${hours > 1 ? 's' : ''}`;
+      return `${hours} 시간 후`;
     } else {
-      return 'tomorrow';
+      return '내일';
     }
   };
 
@@ -91,7 +91,7 @@ const RemindersPanel = ({ reminders, onCompleteReminder, onSnoozeReminder, onAdd
         <div className="bg-error/5 border border-error/20 rounded-xl p-6">
           <div className="flex items-center space-x-2 mb-4">
             <Icon name="AlertTriangle" size={20} className="text-error" />
-            <h3 className="text-lg font-semibold text-error">Overdue Reminders</h3>
+            <h3 className="text-lg font-semibold text-error">경과한 알림</h3>
           </div>
           
           <div className="space-y-3">
@@ -106,7 +106,7 @@ const RemindersPanel = ({ reminders, onCompleteReminder, onSnoozeReminder, onAdd
                   </div>
                   <div>
                     <p className="font-medium text-foreground">{reminder?.title}</p>
-                    <p className="text-sm text-error">Overdue by {reminder?.overdueBy}</p>
+                    <p className="text-sm text-error">{reminder?.overdueBy} 전</p>
                   </div>
                 </div>
                 
@@ -116,7 +116,7 @@ const RemindersPanel = ({ reminders, onCompleteReminder, onSnoozeReminder, onAdd
                     size="sm"
                     onClick={() => onCompleteReminder(reminder?.id)}
                   >
-                    Complete
+                    완료
                   </Button>
                 </div>
               </div>
@@ -127,14 +127,14 @@ const RemindersPanel = ({ reminders, onCompleteReminder, onSnoozeReminder, onAdd
       {/* Upcoming Reminders */}
       <div className="bg-card border border-border rounded-xl p-6 shadow-soft">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-foreground">Upcoming Reminders</h3>
+          <h3 className="text-lg font-semibold text-foreground">다가오는 알림</h3>
           <Button
             variant="outline"
             size="sm"
             iconName="Plus"
             onClick={() => setShowAddForm(!showAddForm)}
           >
-            Add
+            추가
           </Button>
         </div>
 
@@ -142,32 +142,32 @@ const RemindersPanel = ({ reminders, onCompleteReminder, onSnoozeReminder, onAdd
           <div className="mb-6 p-4 bg-muted/30 rounded-lg border border-border">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block text-sm font-medium text-foreground mb-1">Title</label>
+                <label className="block text-sm font-medium text-foreground mb-1">제목</label>
                 <input
                   type="text"
                   value={newReminder?.title}
                   onChange={(e) => setNewReminder({ ...newReminder, title: e?.target?.value })}
-                  placeholder="e.g., Give medication"
+                  placeholder="예) 약 먹이기"
                   className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-foreground mb-1">Type</label>
+                <label className="block text-sm font-medium text-foreground mb-1">종류</label>
                 <select
                   value={newReminder?.type}
                   onChange={(e) => setNewReminder({ ...newReminder, type: e?.target?.value })}
                   className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
                 >
-                  <option value="medication">Medication</option>
-                  <option value="feeding">Feeding</option>
-                  <option value="grooming">Grooming</option>
-                  <option value="checkup">Checkup</option>
-                  <option value="vaccination">Vaccination</option>
-                  <option value="exercise">Exercise</option>
+                  <option value="medication">약 주기</option>
+                  <option value="feeding">밥 주기</option>
+                  <option value="grooming">털 관리하기</option>
+                  <option value="checkup">건강 검진 하기</option>
+                  <option value="vaccination">백신 맞추기</option>
+                  <option value="exercise">운동 하기</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-foreground mb-1">Time</label>
+                <label className="block text-sm font-medium text-foreground mb-1">시간</label>
                 <input
                   type="time"
                   value={newReminder?.time}
@@ -176,25 +176,25 @@ const RemindersPanel = ({ reminders, onCompleteReminder, onSnoozeReminder, onAdd
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-foreground mb-1">Frequency</label>
+                <label className="block text-sm font-medium text-foreground mb-1">주기</label>
                 <select
                   value={newReminder?.frequency}
                   onChange={(e) => setNewReminder({ ...newReminder, frequency: e?.target?.value })}
                   className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
                 >
-                  <option value="daily">Daily</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="monthly">Monthly</option>
-                  <option value="once">One-time</option>
+                  <option value="daily">매일</option>
+                  <option value="weekly">매주</option>
+                  <option value="monthly">매월</option>
+                  <option value="once">한 번</option>
                 </select>
               </div>
             </div>
             <div className="flex items-center space-x-2">
               <Button variant="default" size="sm" onClick={handleAddReminder}>
-                Add Reminder
+                알림 추가
               </Button>
               <Button variant="outline" size="sm" onClick={() => setShowAddForm(false)}>
-                Cancel
+                취소
               </Button>
             </div>
           </div>
@@ -206,7 +206,7 @@ const RemindersPanel = ({ reminders, onCompleteReminder, onSnoozeReminder, onAdd
               <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center mx-auto mb-3">
                 <Icon name="Bell" size={20} className="text-muted-foreground" />
               </div>
-              <p className="text-muted-foreground">No upcoming reminders</p>
+              <p className="text-muted-foreground">다가오는 알림이 없습니다.</p>
             </div>
           ) : (
             upcomingReminders?.map((reminder) => (

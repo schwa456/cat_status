@@ -15,45 +15,45 @@ const QuickActionsPanel = ({ onQuickLog, selectedCat }) => {
   const quickActions = [
     {
       id: 'feeding',
-      label: 'Log Feeding',
+      label: '식사량 기록',
       icon: 'Utensils',
       color: 'text-success bg-success/10 hover:bg-success/20',
-      description: 'Record meal time and amount'
+      description: '식사 시간과 양을 기록하세요.'
     },
     {
       id: 'bathroom',
-      label: 'Bathroom Visit',
+      label: '화장실',
       icon: 'Droplets',
       color: 'text-primary bg-primary/10 hover:bg-primary/20',
-      description: 'Log litter box usage'
+      description: '화장실 사용량을 기록하세요.'
     },
     {
       id: 'play',
-      label: 'Play Session',
+      label: '놀이 시간',
       icon: 'Zap',
       color: 'text-accent bg-accent/10 hover:bg-accent/20',
-      description: 'Track play and exercise'
+      description: '놀이 시간과 활동 정도를 기록하세요.'
     },
     {
       id: 'medication',
-      label: 'Give Medication',
+      label: '약 복용',
       icon: 'Pill',
       color: 'text-warning bg-warning/10 hover:bg-warning/20',
-      description: 'Record medication given'
+      description: '약 복용 내역을 기록하세요.'
     },
     {
       id: 'grooming',
-      label: 'Grooming',
+      label: '그루밍',
       icon: 'Scissors',
       color: 'text-secondary bg-secondary/10 hover:bg-secondary/20',
-      description: 'Log grooming activities'
+      description: '그루밍 활동을 기록하세요.'
     },
     {
       id: 'behavior',
-      label: 'Behavior Note',
+      label: '특이사항',
       icon: 'Activity',
       color: 'text-foreground bg-muted hover:bg-muted/80',
-      description: 'Record behavioral observations'
+      description: '특이사항을 기록하세요.'
     }
   ];
 
@@ -93,15 +93,15 @@ const QuickActionsPanel = ({ onQuickLog, selectedCat }) => {
     switch (type) {
       case 'feeding':
         return [
-          { key: 'amount', label: 'Amount', placeholder: 'e.g., 1/2 cup, 50g', type: 'text' }
+          { key: 'amount', label: '식사량', placeholder: 'e.g., 1/2 cup, 50g', type: 'text' }
         ];
       case 'play':
         return [
-          { key: 'duration', label: 'Duration (minutes)', placeholder: 'e.g., 15', type: 'number' }
+          { key: 'duration', label: '놀이 시간 (분)', placeholder: 'e.g., 15', type: 'number' }
         ];
       case 'medication':
         return [
-          { key: 'amount', label: 'Dosage', placeholder: 'e.g., 1 tablet, 5ml', type: 'text' }
+          { key: 'amount', label: '투여량', placeholder: 'e.g., 1 tablet, 5ml', type: 'text' }
         ];
       default:
         return [];
@@ -112,9 +112,9 @@ const QuickActionsPanel = ({ onQuickLog, selectedCat }) => {
     <>
       <div className="bg-card border border-border rounded-xl p-6 shadow-soft">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-foreground">Quick Actions</h3>
+          <h3 className="text-lg font-semibold text-foreground">빠른 기록</h3>
           <div className="text-xs text-muted-foreground">
-            {selectedCat ? `For ${selectedCat?.name}` : 'Select a cat'}
+            {selectedCat ? `${selectedCat?.name}` : '고양이를 선택하세요.'}
           </div>
         </div>
 
@@ -147,7 +147,7 @@ const QuickActionsPanel = ({ onQuickLog, selectedCat }) => {
           <div className="mt-4 p-3 bg-warning/10 border border-warning/20 rounded-lg">
             <div className="flex items-center space-x-2">
               <Icon name="Info" size={16} className="text-warning" />
-              <p className="text-sm text-warning">Select a cat to enable quick actions</p>
+              <p className="text-sm text-warning">고양이를 선택해주세요.</p>
             </div>
           </div>
         )}
@@ -192,12 +192,12 @@ const QuickActionsPanel = ({ onQuickLog, selectedCat }) => {
 
               <div>
                 <label className="block text-sm font-medium text-foreground mb-1">
-                  Notes (Optional)
+                  특이사항 (선택)
                 </label>
                 <textarea
                   value={quickLogData?.notes}
                   onChange={(e) => setQuickLogData({ ...quickLogData, notes: e?.target?.value })}
-                  placeholder="Add any additional notes..."
+                  placeholder="추가적으로 기록할 내용이 있으면 작성하세요."
                   rows={3}
                   className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 resize-none"
                 />
@@ -209,13 +209,13 @@ const QuickActionsPanel = ({ onQuickLog, selectedCat }) => {
                   onClick={handleQuickLog}
                   className="flex-1"
                 >
-                  Log Activity
+                  활동내역 기록
                 </Button>
                 <Button
                   variant="outline"
                   onClick={() => setShowQuickLogModal(false)}
                 >
-                  Cancel
+                  취소
                 </Button>
               </div>
             </div>

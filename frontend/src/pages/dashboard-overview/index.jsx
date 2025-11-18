@@ -98,40 +98,40 @@ import QuickActionsPanel from './components/QuickActionsPanel';
   const mockReminders = [
     {
       id: 1,
-      title: "Evening medication",
+      title: "저녁약",
       type: "medication",
       time: "18:00",
-      frequency: "daily",
+      frequency: "매일",
       isActive: true,
       priority: "high"
     },
     {
       id: 2,
-      title: "Dinner feeding",
+      title: "저녁밥",
       type: "feeding",
       time: "19:00",
-      frequency: "daily",
+      frequency: "매일",
       isActive: true,
       priority: "medium"
     },
     {
       id: 3,
-      title: "Weekly grooming",
+      title: "주간 그루밍",
       type: "grooming",
       time: "10:00",
-      frequency: "weekly",
+      frequency: "매주",
       isActive: true,
       priority: "low"
     },
     {
       id: 4,
-      title: "Overdue vaccination",
+      title: "경과한 백신",
       type: "vaccination",
       time: "09:00",
-      frequency: "yearly",
+      frequency: "매년",
       isActive: false,
       isOverdue: true,
-      overdueBy: "2 days"
+      overdueBy: "2일"
     }
   ];
 
